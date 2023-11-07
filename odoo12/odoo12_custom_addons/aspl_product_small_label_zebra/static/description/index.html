@@ -1,0 +1,222 @@
+<section class="oe_container">
+    <div>
+        <div class="text-center">
+            <a target="new" href="http://www.acespritech.com">
+                <img src="ace_logo.png" style="width:200px;">
+            </a>
+        </div>
+    </div>
+</section>
+<br/>
+<section class="oe_container oe_dark">
+    <div class="oe_row">
+        <div class="oe_span12">
+            <h2 class="oe_slogan">Odoo 12 Product Small Label with Zebra Printer</h2>
+            <h3 class="oe_slogan">User can create custom label template by frontend and can print the dynamic product label report with Zebra Printer for Odoo which running in same premises or on cloud server.</h3>
+            <div>
+                <font style="color: red; font-weight: bold;"><b>Note: </b>
+                    This module is tested and working in Odoo community edition
+                    but not tested in Enterprise version. And we are supporting Ubuntu OS and not Windows OS.
+                </font>
+            </div>
+            <h4 class="oe_slogan">How to use</h4>
+            <ul>
+                <li style="color: #30054D; font-weight: bold;">Important step to use this module, Install python library which is required to print label.</li>
+                <li style="color: #30054D; font-weight: bold;">Steps to install barcode font library:<br> 
+                    1) Download fonts : http://www.reportlab.com/ftp/fonts/pfbfer.zip<br> 
+                    2) Now put this fonts into location : /usr/lib/python2.7/dist-packages/reportlab/fonts/(put the files)<br> 
+                    Note : if fonts folder does not exists, create that folder and copy that fonts into it.<br> 
+                    3) To see the preview of label install following packages:<br>
+                    ==> sudo apt-get install python3-wand<br> 
+                    ==> sudo apt-get install libmagickwand-dev<br> 
+                    ==> sudo apt-get install imagemagick<br>
+                </li>
+                <li style="color: #30054D; font-weight: bold;">Steps to install node JS and zebra python package:<br> 
+                    1) Copy node application and put into safe folder. Now open terminal and go to that folder and copy paste first two commands.<br> 
+                    ==> sudo pip install simple_zpl2<br> 
+                    ==> sudo npm install express<br> 
+                    2) This is python package which you can install from any path.<br> 
+                    ==> sudo pip install zebra<br>
+                    3) This python package which will be used only for LAN zebra printing Purpose.<br>
+                    ==> sudo apt-get install cups<br>
+                    or<br>
+                    ==> sudo pip3 install pycups<br>
+                    Remember this CUPS you can install any machine but make sure printer and CUPS installed machine should be into same LAN Network.
+                </li>
+                <li style="color: #30054D; font-weight: bold;">After Installing all packages restart odoo server.<br>
+            </ul>
+            <h3 class="oe_slogan">Label print using zebra printer with Node js application</h3>
+            <div class="oe_screenshot" style="text-align: left;">
+                <ul>
+                    <li style="color: #30054D; font-weight: bold;">First Install Zebra printer into client machine.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_zebra_printer_install_node_1.png"><br /> <br /> 
+                <img style="max-width: 100%;" src="odoo_12_zebra_printer_install_node_2.png"><br /> <br /> 
+                <img style="max-width: 100%;" src="odoo_12_zebra_printer_install_node_3.png"><br /> <br /> 
+                <img style="max-width: 100%;" src="odoo_12_zebra_printer_install_node_4.png"><br /> <br />
+                <ul>
+                    <li style="color: #30054D; font-weight: bold;">Install Node application into client machine Where zebra printer is attach.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_node_app_install_5.png"><br /> <br />
+                <ul>
+                    <li style="color: #30054D; font-weight: bold;">Once node app running. Open odoo server. Go to menu Sales-->Product
+                        Small Label-->Label Configuration. Configure 'Odoo Instance Location' as Cloud, give Node Application URL and enter
+                        printer name into list view.
+                    </li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_cloud_printer_configuration_6.png"><br /> <br />
+                <ul>
+                    <li style="color: #30054D; font-weight: bold;">User need to select product(s) and no. of quantity to print product label(s). Select printer where you want to send label data.</li>
+                </ul>
+                <img style="max-width: 100%;" src="main_screenshot.png"><br /> <br />
+                <ul>
+                    <li style="color: #30054D; font-weight: bold;">In "Label" tab, for zebra give only width into DPI.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_cloud_zebra_label_7.png"><br /> <br />
+                <ul>
+                    <li style="color: #30054D; font-weight: bold;">In "Barcode" tab, fill appropriate data to print different type of barcode.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_cloud_zebra_barcode_8.png"><br /> <br />
+                <ul>
+                    <li style="color: #30054D; font-weight: bold;">In "fields" tab, select product table fields and give proper style to text for label.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_cloud_zebra_fields_9.png"><br /> <br />
+                <ul>
+                    <li style="color: #30054D; font-weight: bold;">By clicking on 'Save Design' button, User can save template design.
+                        If user select 'Update Existing Template' check box, so selected design template will save current design.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_cloud_zebra_save_10.png"><br /> <br />
+                <ul>
+                    <li style="color: #30054D; font-weight: bold;">By Clicking on 'Preview' button, you can preview label into new pop up.</li>
+                    <li style="color: #30054D; font-weight: bold;">Select printer and click on 'Print' button, you can print label direct to zebra printer.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_cloud_zebra_preview_11.png" /><br /> <br />
+                <ul>
+                    <li style="color:#30054D;font-weight:bold;">In "Zebra Print Help" tab, user can get help for print barcode.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_zebra_barcode_help_39.png" /><br /> <br />
+            </div>
+
+            <br />
+            <br />
+            <h3 class="oe_slogan">Label print LAN(Local Network) zebra printer.</h3>
+            <div class="oe_screenshot" style="text-align: left;">
+                <ul>
+                    <li style="color: #30054D; font-weight: bold;">Here we need to create CUPS server. For CUPS make sure cups package is install and running on machine where CUPS is install on port 631.</li>
+                </ul>
+                <ul>
+                    <li style="color: #30054D; font-weight: bold;">First Install Zebra printer into local LAN network.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_LAN_printer_install_12.png"><br /> <br /> 
+                <img style="max-width: 100%;" src="odoo_12_LAN_printer_install_13.png"><br /> <br /> 
+                <img style="max-width: 100%;" src="odoo_12_LAN_printer_install_14.png"><br /> <br /> 
+                <img style="max-width: 100%;" src="odoo_12_LAN_printer_install_15.png"><br /> <br />
+                <ul>
+                    <li style="color: #30054D; font-weight: bold;">After Installing Zebra printer on machine, Add printer into CUPS server.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_cups_zebra_install_32.png"><br /> <br />
+                <img style="max-width: 100%;" src="odoo_12_cups_zebra_install_33.png"><br /> <br />
+                <img style="max-width: 100%;" src="odoo_12_cups_zebra_install_34.png"><br /> <br />
+                <img style="max-width: 100%;" src="odoo_12_cups_zebra_install_35.png"><br /> <br />
+                <img style="max-width: 100%;" src="odoo_12_cups_zebra_install_36.png"><br /> <br />
+                <img style="max-width: 100%;" src="odoo_12_cups_zebra_install_37.png"><br /> <br />
+                <img style="max-width: 100%;" src="odoo_12_cups_zebra_install_38.png"><br /> <br />
+                <ul>
+                    <li style="color: #30054D; font-weight: bold;">Once Printers are added into CUPS server. Go to Sales-->Product Small Label-->LAN Printer Servers menu and click on Add printer button.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_LAN_printer_server_config_16.png"><br /> <br />
+                <ul>
+                    <li style="color: #30054D; font-weight: bold;">After creating LAN printer server, configure Label Configuration.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_LAN_label_config_17.png"><br /> <br />
+                
+            </div>
+            <br />
+            <h3 class="oe_slogan">Label design using fields selection</h3>
+            <div class="oe_screenshot" style="text-align: left;">
+                <ul>
+                    <li style="color:#30054D;font-weight:bold;">User need to select product attributes to print product attributes in label(s).</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_LAN_field_selection_product_18.png"><br /><br />
+                <ul>
+                    <li style="color:#30054D;font-weight:bold;">In "Label" tab, take logo and give logo position,height,width to print in label.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_LAN_field_selection_label_19.png"><br /><br />
+                <ul>
+                    <li style="color:#30054D;font-weight:bold;">In "Barcode" tab, select barcode type to print barcode in label.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_LAN_field_selection_barcode_20.png"><br /><br />
+                <ul>
+                    <li style="color:#30054D;font-weight:bold;">In "Fields" tab, select field(s) of product to print in label.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_LAN_field_selection_fields_21.png"><br /><br />
+                <ul>
+                    <li style="color:#30054D;font-weight:bold;">By clicking on "Preview" button get preview.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_LAN_field_selection_preview_22.png"><br /><br />
+                <ul>
+                    <li style="color:#30054D;font-weight:bold;">Print of product label.</li>
+                </ul>
+                <center><img style="max-width: 100%;" src="odoo_12_LAN_field_selection_print_23.png"></center><br /><br />
+            </div>
+            
+            <h3 class="oe_slogan">Label Design using "XML Design"</h3>
+            <div class="oe_screenshot" style="text-align: left;">
+                <ul>
+                    <li style="color:#30054D;font-weight:bold;">User need to select product(s) and no. of quantity to print product label(s).</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_xml_desing_products_24.png"><br /><br />
+                <ul>
+                    <li style="color:#30054D;font-weight:bold;">In "Label" tab, fill appropriate data for report label formatting.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_xml_design_label_25.png"><br /><br />
+                <ul>
+                    <li style="color:#30054D;font-weight:bold;">In "Barcode" tab, fill appropriate data to print different type of barcode.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_xml_design_barcode_26.png"><br /><br />
+                <ul>
+                    <li style="color:#30054D;font-weight:bold;">In "Design" tab, user can add, remove or change sequance of field(s) of product.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_xml_design_qweb_27.png"><br /><br />
+                <ul>
+                    <li style="color:#30054D;font-weight:bold;">By clicking on "Preview" button get preview.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_xml_design_preview_28.png"><br /><br />
+                <ul>
+                    <li style="color:#30054D;font-weight:bold;">Print of product label.</li>
+                </ul>
+                <center><img style="max-width: 100%;" src="odoo_12_xml_design_print_29.png"></center><br /><br />
+                <ul>
+                    <li style="color:#30054D;font-weight:bold;">Here we can see all saved template design.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_save_template_31.png"><br /><br />
+                <ul>
+                    <li style="color:#30054D;font-weight:bold;">In "Barcode Print Help" tab, user can get help for print barcode.</li>
+                </ul>
+                <img style="max-width: 100%;" src="odoo_12_LAN_help_barcode_30.png"><br /><br />
+           </div>
+        </div>
+    </div>
+</section>
+<section class="oe_container">
+   <div class="oe_row" style="background-color: #008000;"> 
+       <div style="margin-bottom:10px;" class="oe_slogan text-center">
+           <div class="oe_span12">
+               <h3 class="text-center" style="color:#FFFFFF; font-size:20px"><b>NOTE:</b> We give 60 days support for our customers. Before trying in your live db, please ask us to provide you for test link. If any other custom modules are installed and because of that some errors occurs then we charge extra.</h3>
+           </div>
+       </div>
+   </div>
+   <div class="oe_row" style="background-color: #004CFF;"> 
+       <div style="margin-bottom:10px;" class="oe_slogan text-center">
+           <div class="oe_span12">
+           <h3 class="text-center" style="color:#FFFFFF; font-size:20px">Contact us for support, query, customization</h3>
+       </div>
+           <span>
+               <a target="new" href="http://www.acespritech.com" style="color: yellow !important;font-weight:bold;">Website</a> | 
+               <a target="new" href="http://www.acespritechblog.com" style="color: yellow !important;font-weight:bold;">Blog</a> | 
+               <a href="mailto:info@acespritech.com" style="color: yellow !important;font-weight:bold;">Email us</a>
+               | <a style="color: yellow !important;font-weight:bold;">Skype: acespritech</a>
+           </span>
+       </div>
+   </div>
+</section>

@@ -1,0 +1,35 @@
+<odoo>
+    <record id="purchase_bonus_qty_inherit_form_view" model="ir.ui.view">
+        <field name="name">purchase.bonus.qty.inherit.form.view</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']//tree//field[@name='product_qty']" position="after">
+                <field name="bonus_qty" attrs="{'readonly':([('state', 'in', 'purchase')])}"/>
+            </xpath>
+            <field name="price_unit" position="after">
+                <field name="new_price_unit" readonly="1"/>
+            </field>
+            <field name="price_subtotal" position="attributes">
+            	<attribute name="readonly">0</attribute>
+            </field>
+            <field name="new_price_unit" attrs="{'readonly':([('state', 'in', 'purchase')])}"/>
+            <xpath expr="//field[@name='order_line']//tree//field[@name='date_planned']" position="after">
+                <field name="date_expire" required="1" attrs="{'readonly':([('state', 'in', 'purchase')])}"/>
+                <field name="lot_number" required="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="stock_picking_new_inherit_form_view" model="ir.ui.view">
+        <field name="name">stock.picking.new.inherit.form.view</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="after">
+                <field name="date_expire" required="1"/>
+                <field name="lot_number" required="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

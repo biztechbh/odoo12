@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report
+            id="aspl_product_small_label_zebra_report"
+            model="wizard.product.small.label.report"
+            string="Dynamic Product Small Label"
+            report_type="qweb-pdf"
+            name="aspl_product_small_label_zebra.prod_small_label_zebra"
+            file="aspl_product_small_label_zebra.prod_small_label_zebra"
+            menu="False"
+            print_report_name="Dynamic Product Small Label.pdf"/>
+
+        <report
+            id="aspl_product_small_fields_label_zebra_report"
+            model="wizard.product.small.label.report"
+            string="Dynamic Product Small Label"
+            report_type="qweb-pdf"
+            name="aspl_product_small_label_zebra.prod_small_fields_label"
+            file="aspl_product_small_label_zebra.prod_small_fields_label"
+            menu="False"
+            print_report_name="Dynamic Product Small Label.pdf"/>
+
+        <record id="paperformat_aspl_product_small_label_zebra" model="report.paperformat">
+            <field name="name">Dynamic Label Paper Format</field>
+            <field name="default" eval="True" />
+            <field name="format">custom</field>
+            <field name="page_height">30</field>
+            <field name="page_width">35</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">0</field>
+            <field name="margin_bottom">1</field>
+            <field name="margin_left">1</field>
+            <field name="margin_right">1</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+            <field name="report_ids" eval="[(6,0,[ref('aspl_product_small_label_zebra.aspl_product_small_label_zebra_report'),
+                                                    ref('aspl_product_small_label_zebra.aspl_product_small_fields_label_zebra_report')])]"/>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="assets_backend" name="Hourly Sales Dashboard Report Assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/biztech_hourly_sales_report/static/src/css/footable.bootstrap.min.css"/>
+                <link rel="stylesheet" href="/biztech_hourly_sales_report/static/src/css/main.css"/>
+<!--                <link rel="stylesheet" href="/dashboard_sales_report/static/src/css/bootstrap.min.css"/>-->
+
+                <script type="text/javascript" src="/biztech_hourly_sales_report/static/src/js/footable.min.js"/>
+                <script type="text/javascript" src="/biztech_hourly_sales_report/static/src/js/main.js"/>
+            </xpath>
+        </template>
+
+        <report
+                id="action_hourly_sales_dashboard_report"
+                string="Hourly Sales Report"
+                model="report.hourly.sale.wizard.download"
+                report_type="qweb-pdf"
+                file="biztech_hourly_sales_report.hourly_report_dashboard"
+                name="biztech_hourly_sales_report.hourly_report_dashboard"
+                print_report_name="'Hourly Sales Report'"
+                menu="False"
+        />
+
+        <template id="print_hourly_sales_dashboard_report">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <t t-set="data" t-value="docs.get_data()"/>
+                    <t t-set="summary" t-value="docs.get_summary()"/>
+                    <br/>
+                    <div class="well">
+                        <div style="padding:0;width:50%;float:left;">
+                            <b>Report Name:</b>
+                            <span t-esc="summary.get('report_name')"/>
+                        </div>
+                        <div style="padding:0;width:50%;float:left;">
+                            <b>Category</b>
+                            <span t-esc="summary.get('data')"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <t t-set="g_count" t-value="0"/>
+                    <t t-set="g_gross" t-value="0"/>
+                    <t t-set="g_discount" t-value="0"/>
+                    <t t-set="g_round" t-value="0"/>
+                    <t t-set="g_lumsum" t-value="0"/>
+                    <t t-set="g_bill_amt" t-value="0"/>
+<!--                    <t t-foreach="data" t-as="dat">-->
+                        <table class="table table-condensed">
+<!--                            <div>-->
+<!--                                <strong>-->
+<!--                                    <span t-esc="str(dat).replace('_', ' ') or 'Non-Defined'"/>-->
+<!--                                    - -->
+<!--                                    <span t-esc="str(dat).replace('_', ' ') or 'Non-Defined'"/>-->
+<!--                                </strong>-->
+<!--                            </div>-->
+                            <tr>
+                                <th>Time</th>
+                                <th style="text-align: right;">No. of Patients</th>
+                                <th style="text-align: right;">Gross</th>
+                                <th style="text-align: right;">Discount</th>
+                                <th style="text-align: right;">R/OFF</th>
+                                <th style="text-align: right;">Lumsum</th>
+                                <th style="text-align: right;">Bill Amount</th>
+                            </tr>
+                            <t t-set="tot_count" t-value="0"/>
+                            <t t-set="tot_gross" t-value="0"/>
+                            <t t-set="tot_discount" t-value="0"/>
+                            <t t-set="tot_round" t-value="0"/>
+                            <t t-set="tot_lumsum" t-value="0"/>
+                            <t t-set="tot_bill_amt" t-value="0"/>
+                            <t t-foreach="data.values()" t-as="d">
+                                <tr>
+                                    <td>
+                                        <span t-esc="d.get('time')"/>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <span t-esc="d.get('count')"/>
+                                    </td>
+                                    <t t-set="tot_count" t-value="tot_count + float(d.get('count'))"/>
+                                    <t t-set="g_count" t-value="g_count + float(d.get('count'))"/>
+                                    <td style="text-align: right;">
+                                        <span t-esc="'%.3f'% d.get('gross')"/><t t-esc="env.user.company_id.currency_id.symbol"/>
+                                    </td>
+                                    <t t-set="tot_gross" t-value="tot_gross + float(d.get('gross'))"/>
+                                    <t t-set="g_gross" t-value="g_gross + float(d.get('gross'))"/>
+                                    <td style="text-align: right;">
+                                        <span t-esc="'%.3f'% d.get('discount')"/><t t-esc="env.user.company_id.currency_id.symbol"/>
+                                    </td>
+                                    <t t-set="tot_discount" t-value="tot_discount + float(d.get('discount'))"/>
+                                    <t t-set="g_discount" t-value="g_discount + float(d.get('discount'))"/>
+                                    <td style="text-align: right;">
+                                        <span t-esc="'%.3f'% d.get('round')"/><t t-esc="env.user.company_id.currency_id.symbol"/>
+                                    </td>
+                                    <t t-set="tot_round" t-value="tot_round + float(d.get('round'))"/>
+                                    <t t-set="g_round" t-value="g_round + float(d.get('round'))"/>
+                                    <td style="text-align: right;">
+                                        <span t-esc="'%.3f'% d.get('lumsum')"/><t t-esc="env.user.company_id.currency_id.symbol"/>
+                                    </td>
+                                    <t t-set="tot_lumsum" t-value="tot_lumsum + float(d.get('lumsum'))"/>
+                                    <t t-set="g_lumsum" t-value="g_lumsum + float(d.get('lumsum'))"/>
+                                    <td style="text-align: right;">
+                                        <span t-esc="'%.3f'% d.get('bill_amount')"/><t t-esc="env.user.company_id.currency_id.symbol"/>
+                                    </td>
+                                    <t t-set="tot_bill_amt" t-value="tot_bill_amt + float(d.get('bill_amount'))"/>
+                                    <t t-set="g_bill_amt" t-value="g_bill_amt + float(d.get('bill_amount'))"/>
+                                </tr>
+                            </t>
+                        </table>
+                    <table class="table table-condensed">
+                        <tfoot>
+                            <tr>
+                                <th/>
+                                <th style="text-align: center;">No. of Patients</th>
+                                <th style="text-align: right;">Gross</th>
+                                <th style="text-align: right;">Discount</th>
+                                <th style="text-align: right;">R/OFF</th>
+                                <th style="text-align: right;">Lumsum</th>
+                                <th style="text-align: right;">Bill Amount</th>
+                            </tr>
+                            <tr>
+                                <th/>
+                                <th style="text-align: center;">
+                                    <span t-esc="g_count"/>
+                                </th>
+                                <th style="text-align: right;">
+                                    <span t-esc="'%.3f'% g_gross"/><t t-esc="env.user.company_id.currency_id.symbol"/>
+                                </th>
+                                <th style="text-align: right;">
+                                    <span t-esc="'%.3f'% g_discount"/><t t-esc="env.user.company_id.currency_id.symbol"/>
+                                </th>
+                                <th style="text-align: right;">
+                                    <span t-esc="'%.3f'% g_round"/><t t-esc="env.user.company_id.currency_id.symbol"/>
+                                </th>
+                                <th style="text-align: right;">
+                                    <span t-esc="'%.3f'% g_lumsum"/><t t-esc="env.user.company_id.currency_id.symbol"/>
+                                </th>
+                                <th style="text-align: right;">
+                                    <span t-esc="'%.3f'% g_bill_amt"/><t t-esc="env.user.company_id.currency_id.symbol"/>
+                                </th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </t>
+        </template>
+
+        <template id="hourly_report_dashboard">
+            <t t-call="web.html_container">
+                <t t-call="biztech_hourly_sales_report.print_hourly_sales_dashboard_report"/>
+            </t>
+        </template>
+
+    </data>
+</odoo>

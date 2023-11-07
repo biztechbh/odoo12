@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="product_dashboard_wizard_form_view">
+            <field name="name">wizard.product.profit.dashboard.report.form</field>
+            <field name="model">wizard.product.profit.dashboard.report</field>
+            <field name="arch" type="xml">
+                <form string="Product Sales Profit Dashboard Report">
+                    <group col="4">
+                        <field name="from_date"/>
+                        <field name="to_date"/>
+                        <field name="categ_id"/>
+                        <field name="product_id"/>
+                        <field name="shop_id"/>
+                    </group>
+
+                    <footer>
+                        <button string="View Report" name="action_dashboard" type="object"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_product_dashboard_wizard" model="ir.actions.act_window">
+            <field name="name">Product Sales Profit Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.product.profit.dashboard.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="product_profit_report"
+                  name="Product Sales Profit Report" action="biztech_product_profit_report.action_product_dashboard_wizard"
+                  parent="flexipharmacy.menu_point_config_report" sequence="1"/>
+
+    </data>
+</odoo>

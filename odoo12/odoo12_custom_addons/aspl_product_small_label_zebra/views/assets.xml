@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="assets_backend" name="aspl_product_small_label_zebra assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/aspl_product_small_label_zebra/static/src/js/qweb_action_manager.js" />
+        </xpath>
+    </template>
+    <template id="external_layout_printer">
+        <div class="header">
+
+        </div>
+        <div class="footer o_background_footer">
+        </div>
+    </template>
+</odoo>
+

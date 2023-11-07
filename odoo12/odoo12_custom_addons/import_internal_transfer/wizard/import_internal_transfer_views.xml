@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_internal_transfer_form" model="ir.ui.view">
+        <field name="name">stock.internal.transfer.wizard</field>
+        <field name="model">stock.internal.transfer</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="picking_type_id"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="location_id" domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]"/>
+                            <field name="location_dest_id" domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]"/>
+                            <field name="import_file"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="import_csv" string="Import" type="object"/>
+                    <button name="cancel" string="Discard" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_internal_transfer111" model="ir.actions.act_window">
+        <field name="name">Import Transfer Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.internal.transfer</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_internal_transfer_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="menu_action_internal_transfer11"
+        parent="stock.menu_stock_warehouse_mgmt"
+        action="action_internal_transfer111"
+        groups="stock.group_stock_multi_locations"
+        sequence="28"/>
+</odoo>

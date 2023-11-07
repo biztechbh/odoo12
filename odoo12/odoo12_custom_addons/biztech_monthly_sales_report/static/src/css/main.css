@@ -1,0 +1,40 @@
+.fa-2x {
+    font-size: 2em !important;
+}
+.fa-3x {
+    font-size: 3em !important;
+}
+.fa-4x {
+    font-size: 4em !important;
+}
+.fa-5x {
+    font-size: 5em !important;
+}
+
+
+.btn-default {
+    color: #4c4c4c;
+    background-color: #ffffff;
+    border-color: #cccccc;
+}
+
+{
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

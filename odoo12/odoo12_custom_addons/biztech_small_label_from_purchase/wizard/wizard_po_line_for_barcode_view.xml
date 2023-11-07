@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="wizard_purchase_order_line_barcode_form_view">
+            <field name="name">wizard.purchase.order.line.barcode.form</field>
+            <field name="model">wizard.purchase.order.line.barcode</field>
+            <field name="arch" type="xml">
+                <form string="Wizard Purchase Order Line For Print Barcode">
+                    <group col="4">
+                        <field name="purchase_order_id" nolabel="1"/>
+                    </group>
+                    <group col="4">
+                        <field name="purchase_order_lines" nolabel="1" >
+                            <tree editable="top" create="0" delete="1">
+                                <field name="product_id"/>
+                                <field name="state" invisible="1"/>
+                                <field name="date_expire" required="1" attrs="{'readonly':([('state', 'in', 'purchase')])}"/>
+                                <field name="lot_number" required="1"/>
+                                <field name="product_qty"/>
+                                <field name="bonus_qty"/>
+                                <field name="new_price_unit"/>
+                                <field name="price_unit"/>
+                                <field name="price_subtotal"/>
+                            </tree>
+                        </field>
+                    </group>
+
+                    <footer>
+                        <button string="Sent For Print" name="sent_for_print" type="object"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_wizard_purchase_order_line_barcode" model="ir.actions.act_window">
+            <field name="name">Wizard Purchase Order Line For Print Barcode</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.purchase.order.line.barcode</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="internal_layout_barcode_zebra">
+            <div class="header">
+                <div class="row">
+                    <div class="col-xs-2 col-xs-offset-3 text-right">
+                        <ul class="list-inline">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="article">
+                <t t-raw="0" />
+            </div>
+        </template>
+        <template id="prod_small_fields_label">
+            <t t-call="web.html_container">
+                <span t-foreach="get_label_data(data['form'])" t-as="product">
+                    <t t-call="aspl_product_small_label_zebra.internal_layout_barcode_zebra">
+                        <div class="page">
+                            <t t-if="data['form']['logo_position'] == 'top'">
+                                <div align="center">
+                                    <t t-set="logo_style" t-value="get_logo_style(data['form'])" />
+                                    <img t-att-src="'data:image/png;base64,%s' % to_text(data['form']['label_logo'])" t-att-style="logo_style" />
+                                </div>
+                            </t>
+                            <t t-foreach="data['fields_list']" t-as="field">
+                                <span t-foreach="get_record_set(field)" t-as="f">
+                                    <t t-if="draw_style(f, product, data)">
+                                        <t t-set="span_style" t-value="get_span_style(f)" />
+                                        <t t-if="f.field_id.name == 'barcode'">
+                                            <div t-att-style="span_style">
+                                                <t t-set="style" t-value="get_style(data)" />
+                                                <img t-att-src="'data:image/png;base64,%s' % to_text(draw_style(f, product, data))" t-att-style="style" />
+                                            </div>
+                                        </t>
+                                        <t t-if="f.field_id.name != 'barcode'">
+                                            <div t-att-style="span_style">
+                                                <div t-raw="draw_style(f, product, data)" />
+                                            </div>
+                                        </t>
+                                    </t>
+                                </span>
+                            </t>
+                            <t t-if="data['form']['logo_position'] == 'bottom'">
+                                <div align="center">
+                                    <t t-set="logo_style" t-value="get_logo_style(data['form'])" />
+                                    <img t-att-src="'data:image/png;base64,%s' % to_text(data['form']['label_logo'])" t-att-style="logo_style" />
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+                </span>
+            </t>
+        </template>
+
+    </data>
+</odoo>

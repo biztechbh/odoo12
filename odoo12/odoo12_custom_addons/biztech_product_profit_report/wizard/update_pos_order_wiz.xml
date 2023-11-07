@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="update_pos_order_form_view_wizard" model="ir.ui.view">
+            <field name="name">update.pos.order.form.view.wiz</field>
+            <field name="model">update.pos.order.wiz</field>
+            <field name="arch" type="xml">
+                <form>
+                	<group>
+                		<group>
+                			<field name="single_pos"/>
+                        	<field name="limit" attrs="{'invisible':[('single_pos','=',True)]}"/> 
+                        	<field name="pos_order_id" attrs="{'invisible':[('single_pos','=',False)]}" 
+                        	options='{"no_open": True, "no_create": True, "no_edit": True}'/>
+                    	</group>
+                		<group>
+                			
+                		</group>
+                	</group>
+                    <footer>
+                        <button type="object" name="update_old_pos_action"
+                                string="Update" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_update_old_pos_order" model="ir.actions.act_window">
+            <field name="name">Update POS Order</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">update.pos.order.wiz</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+     </data>
+  </openerp>

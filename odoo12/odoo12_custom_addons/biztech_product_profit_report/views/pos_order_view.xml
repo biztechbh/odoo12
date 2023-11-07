@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="pos_order_inherited_form_view_biztech" model="ir.ui.view">
+        <field name="name">pos.order.inherited.view.biztech</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+        	
+        	<xpath expr="//form/header/button[@name='refund']" position="after">
+        		<button name="%(action_update_old_pos_order)d" string="Update Cost" type="action"
+        		groups="base.group_system"/>
+        	</xpath>
+        	<xpath expr="//field[@name='lines']/tree/field[@name='qty']" position="after">
+                <field name="cost_price_updated" invisible="0"/>
+            </xpath>
+        </field>
+     </record>
+     
+     <record id="pos_order_lines_inherited_form_view_biztech" model="ir.ui.view">
+        <field name="name">pos.order.lines.tree.inherited.view.biztech</field>
+        <field name="model">pos.order.line</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_order_line"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='product_id']" position="before">
+                <field name="order_id"/>
+            </xpath>
+            <xpath expr="//field[@name='create_date']" position="before">
+            	<field name="profit_amount" sum="total"/>
+            	<field name="profit_percentage"/>
+                <field name="cost_price_updated"/>
+            </xpath>
+            <xpath expr="//field[@name='price_unit']" position="before">
+            	<field name="cost_price" sum="total"/>
+            </xpath>
+<!--             <xpath expr="//field[@name='price_unit']" position="after"> -->
+<!--             	<field name="cost_subtotal" sum="total"/> -->
+<!--             </xpath> -->
+            
+        </field>
+      </record>
+     
+     <menuitem id="menu_point_of_sale_lines" 
+     parent="point_of_sale.menu_point_of_sale" 
+     action="point_of_sale.action_pos_order_line" 
+     sequence="1" string="All POS Order Lines"/>
+     
+ </odoo>

@@ -1,0 +1,38 @@
+<odoo>
+    <record id="purchase_history_wizard_view" model="ir.ui.view">
+        <field name="name">purchase.history.wizard.view</field>
+        <field name="model">purchase.history.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="preview_history" readonly="1" nolabel="1">
+                        <tree>
+                            <field name="order_id" string="Reference"/>
+                            <field name="date_order"/>
+                            <field name="name"/>
+                            <field name="product_id"/>
+                            <field name="product_qty"/>
+                            <field name="bonus_qty"/>
+                            <field name="new_price_unit"/>
+                            <field name="price_unit"/>
+                            <field name="price_subtotal"/>
+                        </tree>
+                    </field>
+                </group>
+                <footer>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_purchase_history_wizard" model="ir.actions.act_window">
+        <field name="name">Purchase History</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.history.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="purchase_history_wizard_view"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

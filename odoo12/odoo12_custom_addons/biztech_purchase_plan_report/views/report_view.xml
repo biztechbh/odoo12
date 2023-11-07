@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="assets_backend" name="Purchase Planning Dashboard Report Assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/biztech_purchase_plan_report/static/src/css/footable.bootstrap.min.css"/>
+                <link rel="stylesheet" href="/biztech_purchase_plan_report/static/src/css/main.css"/>
+<!--                <link rel="stylesheet" href="/dashboard_sales_report/static/src/css/bootstrap.min.css"/>-->
+
+                <script type="text/javascript" src="/biztech_purchase_plan_report/static/src/js/footable.min.js"/>
+                <script type="text/javascript" src="/biztech_purchase_plan_report/static/src/js/main.js"/>
+            </xpath>
+        </template>
+
+        <report
+                id="action_purchase_plan_dashboard_report"
+                string="Purchase Planning Report"
+                model="report.purchase.plan.wizard.download"
+                report_type="qweb-pdf"
+                file="biztech_purchase_plan_report.report_dashboard"
+                name="biztech_purchase_plan_report.report_dashboard"
+                print_report_name="'Purchase Planning Report'"
+                menu="False"
+        />
+
+        <template id="print_dashboard_report">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <t t-set="data" t-value="docs.get_data()"/>
+                    <t t-set="summary" t-value="docs.get_summary()"/>
+                    <br/>
+                        <div class="well">
+                            <div style="padding:0;width:50%;float:left;">
+                                <b>Report Name:</b>
+                                <span t-esc="summary.get('report_name')"/>
+                            </div>
+                            <div style="padding:0;width:50%;float:left;">
+                                <b>Date:</b>
+                                <span t-esc="summary.get('data')"/>
+                            </div>
+                        </div>
+                        <t t-set="g_tot_qty" t-value="0"/>
+                        <t t-foreach="data" t-as="da">
+                            <table class="table table-condensed">
+                                <div>
+                                    <strong>
+                                        <span t-esc="data.get(da)[0].get('categ_name').replace('_', ' ') or 'Non-Defined'"/>
+                                        -
+                                        <span t-esc="data.get(da)[0].get('categ_name').replace('_', ' ') or 'Non-Defined'"/>
+                                    </strong>
+                                </div>
+                                <tr>
+                                    <th class="col-8">Product</th>
+                                    <th class="col-4">QTY</th>
+                                </tr>
+                                <t t-set="tot_qty" t-value="0"/>
+                                <t t-foreach="data.get(da)" t-as="d">
+                                    <tr>
+                                        <td>
+                                            <span t-esc="d.get('product')"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="d.get('qty')"/>
+                                        </td>
+                                        <t t-set="tot_qty" t-value="tot_qty + float(d.get('qty'))"/>
+                                        <t t-set="g_tot_qty" t-value="g_tot_qty + float(d.get('qty'))"/>
+                                    </tr>
+                                </t>
+                                <tr>
+                                    <th>----</th>
+                                    <th>
+                                        <span t-esc="tot_qty"/>
+                                    </th>
+                                </tr>
+                            </table>
+                        </t>
+                        <table class="table table-condensed">
+                            <tfoot>
+                                <tr>
+                                    <th class="col-8"/>
+                                    <th class="col-4">QTY</th>
+                                </tr>
+                                <tr>
+
+                                    <th/>
+                                    <th>
+                                        <span t-esc="g_tot_qty"/>
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                </div>
+            </t>
+        </template>
+
+        <template id="report_dashboard">
+            <t t-call="web.html_container">
+                <t t-call="biztech_purchase_plan_report.print_dashboard_report"/>
+            </t>
+        </template>
+
+    </data>
+</odoo>

@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="product_small_label_acespritech" name="Product Small Label" parent="sale.sale_menu_root" />
+
+        <record id="wizard_product_small_label_design_form_view" model="ir.ui.view">
+            <field name="name">Product.Small.Label.Design</field>
+            <field name="model">product.small.label.design</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Product Small Label Design">
+                    <group>
+                        <field name="name" />
+                        <field name="template_label_design" invisible="1" />
+                        <field name="active" invisible="1" />
+                    </group>
+                    <footer>
+                        <button name="go_to_label_wizard" string="Save" type="object" class="oe_highlight" />
+                        or
+                        <button name="close_wizard" string="Cancel" type="object" class="oe_link" context="{'cancel_change' : True}" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="product_small_label_design_form_view" model="ir.ui.view">
+            <field name="name">Product.Small.Label.Design.Template</field>
+            <field name="model">product.small.label.design</field>
+            <field name="priority">2</field>
+            <field name="arch" type="xml">
+                <form string="Product Small Label design">
+                    <group>
+                        <group>
+                            <field name="name" required="1" />
+                            <field name="active" invisible="1" />
+                            <field name="pricelist_id" groups="product.group_sale_pricelist" widget="selection" />
+                            <field name="label_logo" widget="image" attrs="{'invisible': [('label_config_option', '=', 'cloud')]}" />
+                        </group>
+                        <group>
+                            <field name="label_config_option" required="1" />
+                            <field name="design_using"
+                                attrs="{'invisible':[('label_config_option', '=', 'cloud')], 'required':[('label_config_option', '=', 'local')]}" />
+                            <field name="currency_id" options="{'no_create': True, 'no_open': True}"
+                                attrs="{'invisible': [('design_using', '=', 'xml_design'), ('label_config_option', '=', 'local')]}" />
+                            <field name="currency_position" attrs="{'invisible': [('design_using', '=', 'xml_design'), ('label_config_option', '=', 'local')]}" />
+                            <field name="logo_position" attrs="{'invisible': [('design_using', '=', 'xml_design')]}" />
+                            <field name="logo_height" attrs="{'invisible': [('design_using', '=', 'xml_design')]}" />
+                            <field name="logo_width" attrs="{'invisible': [('design_using', '=', 'xml_design')]}" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Design" attrs="{'invisible': ['|', ('label_config_option', '=', 'cloud'), ('design_using', '=', 'fields_selection')]}">
+                            <field name="template_label_design" attrs="{'required':[('design_using', '=', 'xml_design'), ('label_config_option', '=', 'local')]}"
+                                widget="ace" />
+                        </page>
+                        <page string="Label">
+                            <group>
+                                <group>
+                                    <div>
+                                        <label for="label_width" string="Label Width(DPI)" attrs="{'invisible': [('label_config_option', '=', 'local')]}"
+                                            style="font-weight:bold" />
+                                        <label for="label_width" string="Label Widht(mm)" attrs="{'invisible': [('label_config_option', '=', 'cloud')]}"
+                                            style="font-weight:bold" />
+                                    </div>
+                                    <field name="label_width" nolabel="1" style="width: 217px;margin-left: 7px;" />
+                                    <field name="label_height" />
+                                    <field name="dpi" attrs="{'invisible': [('label_config_option', '=', 'cloud')]}" />
+                                </group>
+                                <group>
+                                    <field name="margin_top" attrs="{'invisible': [('label_config_option', '=', 'cloud')]}" />
+                                    <field name="margin_left" attrs="{'invisible': [('label_config_option', '=', 'cloud')]}" />
+                                    <field name="margin_bottom" attrs="{'invisible': [('label_config_option', '=', 'cloud')]}" />
+                                    <field name="margin_right" attrs="{'invisible': [('label_config_option', '=', 'cloud')]}" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Barcode">
+                            <group>
+                                <group>
+                                    <field name="with_barcode" attrs="{'invisible': [('label_config_option', '=', 'cloud')]}" />
+                                    <field name="barcode_height" attrs="{'required': [('with_barcode', '=', True)]}" />
+                                    <field name="barcode_width"
+                                        attrs="{'invisible': ['|', ('label_config_option', '=', 'cloud'), ('with_barcode', '=', False)], 'required': [('with_barcode', '=', True)]}" />
+                                    <field name="barcode_type"
+                                        attrs="{'invisible': ['|', ('label_config_option', '=', 'cloud'), ('design_using', '=', 'xml_design')]}" />
+                                    <field name="print_text" attrs="{'invisible': [('label_config_option', '=', 'local')]}" />
+                                    <field name="text_above" attrs="{'invisible': [('label_config_option', '=', 'local')]}" />
+                                    <field name="zebra_barcode_type" attrs="{'invisible': [('label_config_option', '=', 'local')]}" />
+                                </group>
+                                <group>
+                                    <field name="humanReadable" attrs="{'invisible': ['|', ('label_config_option', '=', 'cloud'), ('with_barcode', '=', False)]}" />
+                                    <field name="display_height"
+                                        attrs="{'invisible': ['|', ('label_config_option', '=', 'cloud'), ('with_barcode', '=', False)], 'required': [('with_barcode', '=', True)]}" />
+                                    <field name="display_width"
+                                        attrs="{'invisible': ['|', ('label_config_option', '=', 'cloud'), ('with_barcode', '=', False)], 'required': [('with_barcode', '=', True)]}" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Fields" attrs="{'invisible': ['|', ('label_config_option', '=', 'cloud'), ('design_using', '=', 'xml_design')]}">
+                            <field name="product_field_lines">
+                                <tree string="Lines" editable="top">
+                                    <field name="font_size" />
+                                    <field name="font_color" />
+                                    <field name="field_width" />
+                                    <field name="margin_value" />
+                                    <field name="with_currency" />
+                                    <field name="sequence" />
+                                    <field name="field_id" options="{'no_create': True, 'no_open': True}" context="{'from_wizard': True}"
+                                        domain="[('model_id.model', '=', 'product.product')]" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Fields" attrs="{'invisible': [('label_config_option', '=', 'local')]}">
+                            <field name="product_field_cloud_lines">
+                                <tree string="Lines" editable="top">
+                                    <field name="design_id" invisible="1" />
+                                    <field name="x_position" />
+                                    <field name="y_position" />
+                                    <field name="font_size" />
+                                    <field name="font_type" />
+                                    <field name="font_orientation" />
+                                    <field name="alignment" />
+                                    <field name="field_id" options="{'no_create': True, 'no_open': True}" context="{'from_wizard': True}"
+                                        domain="[('model_id.model', '=', 'product.product')]" />
+                                    <field name="with_currency" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <record id="product_small_label_design_tree_view" model="ir.ui.view">
+            <field name="name">Product.Small.Label.Design</field>
+            <field name="model">product.small.label.design</field>
+            <field name="arch" type="xml">
+                <tree string="Product Label design">
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_product_small_label_design" model="ir.actions.act_window">
+            <field name="name">Product Label Design</field>
+            <field name="res_model">product.small.label.design</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_product_label_design_tree" model="ir.actions.act_window.view">
+            <field eval="0" name="sequence" />
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="product_small_label_design_tree_view" />
+            <field name="act_window_id" ref="action_product_small_label_design" />
+        </record>
+
+        <!-- child view first -->
+        <record id="action_product_label_design_form" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence" />
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="product_small_label_design_form_view" />
+            <field name="act_window_id" ref="action_product_small_label_design" />
+        </record>
+
+        <menuitem id="menuitem_product_small_label_design_template" action="action_product_small_label_design" name="Small Label Design Template"
+            parent="product_small_label_acespritech" />
+
+        <record id="aspl_product_small_label_zebra_form_wizard" model="ir.ui.view">
+            <field name="name">Product.Small.Label</field>
+            <field name="model">wizard.product.small.label.report</field>
+            <field name="arch" type="xml">
+                <form string="Product Small Label">
+                    <header>
+                        <button name="action_print" id="zebra_node_print_button" string="Print" type="object" class="oe_highlight zebra_node_print_button"/>
+                        <button name="action_print_preview" id="zebra_node_preview_button" string="Preview" type="object" class="oe_highlight zebra_node_preview_button"/>
+                    </header>
+                    <group>
+                        <group>
+                            <div>
+                                <label for="design_id" style="font-weight:bold"/>
+                                <field name="design_id" colspan="2" nolabel="1" required="1" options="{'no_create': True, 'no_open': True}"/>
+                            </div>
+                            <group>
+                                <button name="save_design" style="margin-left:20px;" string="Save Design" type="object" context="{'from_wizard' : True}" class="oe_highlight"/>
+                            </group>
+                            <group col="2" style="width:100%">
+                                <field name="make_update_existing"/>
+                                <field name="design_using" attrs="{'invisible': [('label_config_option', '=', 'cloud')], 'required': [('label_config_option', '=', 'local')]}"/>
+                            </group>
+                            <group col="2" style="width:100%">
+                                <field name="pricelist_id" groups="product.group_sale_pricelist" widget="selection"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="label_config_option" invisible="1"/>
+                            <field name="print_behaviour" attrs="{'invisible': [('label_config_option', '=', 'cloud')]}"/>
+                            <field name="printing_printer_id" attrs="{'invisible': ['|', ('print_behaviour', '=', 'client'), ('label_config_option', '=', 'cloud')], 'required': [('print_behaviour', '=', 'server'), ('label_config_option', '=', 'local')]}"/>
+                            <field name="cloud_printer_id" attrs="{'invisible': [('label_config_option', '=', 'local')], 'required': [('label_config_option', '=', 'cloud')]}"/>
+                            <field name="currency_id" options="{'no_create': True, 'no_open': True}" attrs="{'invisible': [('design_using', '=', 'xml_design'), ('label_config_option', '=', 'local')]}"/>
+                            <field name="currency_position" attrs="{'invisible': [('design_using', '=', 'xml_design'), ('label_config_option', '=', 'local')]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Products">
+                            <group>
+
+                                <field name="product_ids">
+                                    <tree string="Products" editable="top">
+                                        <field name="product_id"/>
+                                        <field name="stock_production_lot_id" context="{'product_id':product_id}"/>
+                                        <field name="qty"/>
+                                        <!--<field name="attribute_ids" options="{'no_create': True, 'no_open': True}" widget="many2many_tags" readonly="0" context="{'from_wizard': True, 'product_id': product_id}"/>-->
+                                        <field name="line_id" invisible="1"/>
+                                    </tree>
+                                </field>
+
+                            </group>
+                        </page>
+                        <page string="Label">
+                            <group>
+                                <group>
+                                    <div>
+                                        <label for="label_width" string="Label Width(DPI)" attrs="{'invisible': [('label_config_option', '=', 'local')]}" style="font-weight:bold"/>
+                                        <label for="label_width" string="Label Widht(mm)" attrs="{'invisible': [('label_config_option', '=', 'cloud')]}" style="font-weight:bold"/>
+                                    </div>
+                                    <field name="label_width" nolabel="1" style="width: 217px;margin-left: 7px;"/>
+                                    <field name="label_height"/>
+                                    <field name="dpi" attrs="{'invisible': [('label_config_option', '=', 'cloud')]}"/>
+                                </group>
+                                <group>
+                                    <field name="margin_top" attrs="{'invisible': [('label_config_option', '=', 'cloud')]}"/>
+                                    <field name="margin_left" attrs="{'invisible': [('label_config_option', '=', 'cloud')]}"/>
+                                    <field name="margin_bottom" attrs="{'invisible': [('label_config_option', '=', 'cloud')]}"/>
+                                    <field name="margin_right" attrs="{'invisible': [('label_config_option', '=', 'cloud')]}"/>
+                                </group>
+                            </group>
+                            <group>
+                                <group>
+                                    <field name="label_logo" options="{&quot;size&quot;: [200, 200]}" widget="image" attrs="{'invisible': [('label_config_option', '=', 'cloud')]}"/>
+                                </group>
+                                <group>
+                                    <field name="logo_position" attrs="{'invisible': ['|', ('label_config_option', '=', 'cloud'), ('design_using', '=', 'xml_design')]}"/>
+                                    <field name="logo_height" attrs="{'invisible': ['|', ('label_config_option', '=', 'cloud'), ('design_using', '=', 'xml_design')]}"/>
+                                    <field name="logo_width" attrs="{'invisible': ['|', ('label_config_option', '=', 'cloud'), ('design_using', '=', 'xml_design')]}"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Barcode">
+                            <group>
+                                <group>
+                                    <field name="with_barcode" attrs="{'invisible': [('label_config_option', '=', 'cloud')]}"/>
+                                    <field name="barcode_height" attrs="{'required': [('with_barcode', '=', True)]}"/>
+                                    <field name="barcode_width" attrs="{'invisible': ['|', ('label_config_option', '=', 'cloud'), ('with_barcode', '=', False)], 'required': [('with_barcode', '=', True)]}"/>
+                                    <field name="barcode_type" attrs="{'invisible': ['|', ('label_config_option', '=', 'cloud'), ('design_using', '=', 'xml_design')]}"/>
+
+                                    <field name="print_text" attrs="{'invisible': [('label_config_option', '=', 'local')], 'required': [('label_config_option', '=', 'cloud')]}"/>
+                                    <field name="text_above" attrs="{'invisible': [('label_config_option', '=', 'local')], 'required': [('label_config_option', '=', 'cloud')]}"/>
+                                    <field name="zebra_barcode_type" attrs="{'invisible': [('label_config_option', '=', 'local')], 'required': [('label_config_option', '=', 'cloud')]}"/>
+                                </group>
+                                <group>
+                                    <field name="humanReadable" attrs="{'invisible': ['|', ('label_config_option', '=', 'cloud'), ('with_barcode', '=', False)]}"/>
+                                    <field name="display_height" attrs="{'invisible': ['|', ('label_config_option', '=', 'cloud'), ('with_barcode', '=', False)], 'required': [('with_barcode', '=', True)]}"/>
+                                    <field name="display_width" attrs="{'invisible': ['|', ('label_config_option', '=', 'cloud'), ('with_barcode', '=', False)], 'required': [('with_barcode', '=', True)]}"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Design" attrs="{'invisible': ['|', ('label_config_option', '=', 'cloud'), ('design_using', '=', 'fields_selection')]}">
+                            <field name="view_id" invisible="1"/>
+                            <field name="paper_format_id" invisible="1"/>
+                            <field name="report_design" widget="ace" attrs="{'required':[('design_using', '=', 'xml_design'), ('label_config_option', '=', 'local')]}"/>
+                        </page>
+                        <page string="Fields" attrs="{'invisible': ['|', ('design_using', '=', 'xml_design'),                                                                         ('label_config_option', '=', 'cloud')]}">
+                            <field name="product_field_lines">
+                                <tree string="Lines" editable="top">
+                                    <field name="font_size"/>
+                                    <field name="font_color"/>
+                                    <field name="field_width"/>
+                                    <field name="margin_value"/>
+                                    <field name="with_currency"/>
+                                    <field name="sequence"/>
+                                    <field name="field_id" options="{'no_create': True, 'no_open': True}" context="{'from_wizard': True}" domain="[('model_id.model', '=', 'product.product')]"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Fields" attrs="{'invisible': [('label_config_option', '=', 'local')]}">
+                            <field name="product_field_cloud_lines">
+                                <tree string="Lines" editable="top">
+                                    <field name="wizard_id" invisible="1"/>
+                                    <field name="x_position"/>
+                                    <field name="y_position"/>
+                                    <field name="font_size"/>
+                                    <field name="font_type"/>
+                                    <field name="font_orientation"/>
+                                    <field name="alignment"/>
+                                    <field name="field_id" domain="[('model_id.model', '=', 'product.product')]"/>
+                                    <field name="with_currency"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Barcode Print Help" attrs="{'invisible': [('label_config_option', '=', 'cloud')]}">
+                            <div style="padding-left:5px;">
+                                <span>
+                                    <strong>To print barcode follow below the rules.</strong>
+                                </span>
+                                <br/>
+                                <span>
+                                    here is the function that will generate barcode =&gt; "
+                                    <strong>get_barcode_string(barcode_number, type, data)</strong>
+                                    "
+                                </span>
+                                <br/>
+                                <span>
+                                    First parameter of Function, That is
+                                    <strong>barcode_number</strong>
+                                    .
+                                </span>
+                                <br/>
+                                <span style="padding-left:10px;">
+                                    <strong>*</strong>
+                                    here you have to place the field name that contain barcode number
+                                </span>
+                                <br/>
+                                <span>
+                                    Second parameter of function is
+                                    <strong>type</strong>
+                                    .
+                                </span>
+                                <br/>
+                                <span style="padding-left:10px;">
+                                    <strong>*</strong>
+                                    here you have to place barcode type along with single quote.
+                                </span>
+                                <br/>
+                                <span>
+                                    <strong>Supported barcode type are : </strong>
+                                </span>
+                                <ul>
+                                    <li>EAN13</li>
+                                    <li>Codabar</li>
+                                    <li>Code11</li>
+                                    <li>Code128</li>
+                                    <li>Extended39</li>
+                                    <li>EAN8</li>
+                                    <li>Extended93</li>
+                                    <li>USPS_4State</li>
+                                    <li>I2of5</li>
+                                    <li>UPCA</li>
+                                    <li>QR</li>
+                                </ul>
+                            </div>
+                        </page>
+                        <page string="Zebra Print Help" attrs="{'invisible': [('label_config_option', '=', 'local')]}">
+                            <div style="padding-left:5px;">
+                                <span>
+                                    <strong>To Print barcode follow below intractions.</strong>
+                                </span>
+                                <br/>
+                                <span>
+                                    <strong>Supported barcode type are : </strong>
+                                </span>
+                                <ul>
+                                    <li>EAN13</li>
+                                    <li>Code128</li>
+                                    <li>EAN8</li>
+                                    <li>UPCA </li>
+                                    <li>QR</li>
+                                    <li>Stabdard2to5</li>
+                                </ul>
+                                <span>
+                                    <strong>Fields which help to print barcode properly. </strong>
+                                </span>
+                                <ul>
+                                    <li>
+                                        Font size into fields line, which changes into fontsize of barcode number.Barcode
+                                        with will increase according
+                                        to
+                                        the fontsize.
+                                    </li>
+                                    <li>
+                                        Print text to print barcode number.
+                                    </li>
+                                    <li>
+                                        Text Above will print barcode number above the barcode image.
+                                    </li>
+                                    <li>
+                                        Orientation which you can give for barcode.
+                                    </li>
+                                </ul>
+                            </div>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_small_product_barcode_form" multi="False" name="Print Small Product Label" res_model="wizard.product.small.label.report"
+            view_mode="form" target="inline" view_type="form" />
+
+        <menuitem id="menu_print_product_small_label" action="action_small_product_barcode_form" string="Print Product Small Label" parent="product_small_label_acespritech" />
+
+        <record id="wizard_report_image_preview_form_view" model="ir.ui.view">
+            <field name="name">report.image.preview</field>
+            <field name="model">report.image.preview</field>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <form string="Preview">
+                    <sheet>
+                        <div>
+                            <center>
+                                <field name="report_image" widget="image" options='{"size": [400, 400]}' nolabel="1" readonly="1" />
+                            </center>
+                        </div>
+                        <footer>
+                            <button string="Cancel" class="oe_link" special="cancel" />
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

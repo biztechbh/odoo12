@@ -1,0 +1,438 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* biztech_monthly_sales_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-29 11:47+0000\n"
+"PO-Revision-Date: 2019-03-29 11:47+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "<b>Date:</b>"
+msgstr "<b>Date:</b>"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "<b>Report Name:</b>"
+msgstr "<b>Report Name:</b>"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.monthly_sales_dashboard_wizard_form_view
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: biztech_monthly_sales_report
+#: selection:wizard.monthly.sales.dashboard.report,so_state:0
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.view_report_wizard_download
+msgid "Close"
+msgstr "Cerrar"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_report_wizard_download_create_uid
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_wizard.monthly.sales.dashboard.report_create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_report_wizard_download_create_date
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_wizard.monthly.sales.dashboard.report_create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "Customer Int. Ref."
+msgstr "Código Cliente"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "Customer Name"
+msgstr "Nombre del cliente"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.monthly_sales_dashboard_wizard_form_view
+msgid "Customer Ref. Filter"
+msgstr "Filtrar por cód. de cliente"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_wizard.monthly.sales.dashboard.report_customer_selection
+msgid "Customer Selection"
+msgstr "Filtro por clientes"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_wizard.monthly.sales.dashboard.report_customer_ids
+msgid "Customer(s)"
+msgstr "Cliente(s)"
+
+#. module: biztech_monthly_sales_report
+#: selection:wizard.monthly.sales.dashboard.report,customer_selection:0
+msgid "Customers"
+msgstr "Filtro por cliente(s)"
+
+#. module: biztech_monthly_sales_report
+#: selection:wizard.monthly.sales.dashboard.report,customer_selection:0
+msgid "Customers Ref."
+msgstr "Cliente por cód"
+
+#. module: biztech_monthly_sales_report
+#: selection:report.wizard.download,report_type:0
+#: selection:wizard.monthly.sales.dashboard.report,report_type:0
+msgid "Daily Sales Full Report"
+msgstr "Ventas Diarias Completo"
+
+#. module: biztech_monthly_sales_report
+#: selection:report.wizard.download,report_type:0
+#: selection:wizard.monthly.sales.dashboard.report,report_type:0
+msgid "Daily Sales Summary"
+msgstr "Resumen Ventas Diarias"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.actions.report,name:biztech_monthly_sales_report.action_sales_dashboard_report
+msgid "Dashboard Report"
+msgstr "Dashboard Report"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_report_wizard_download_data_pdf
+msgid "Data"
+msgstr "Datos"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "Date"
+msgstr "Fecha"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_report_wizard_download_display_name
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_wizard.monthly.sales.dashboard.report_display_name
+msgid "Display Name"
+msgstr "Nombre a Mostrar"
+
+#. module: biztech_monthly_sales_report
+#: code:addons/biztech_monthly_sales_report/wizard/dashboard.py:76
+#, python-format
+msgid "End Date should be grater than Start Date."
+msgstr "End Date should be grater than Start Date."
+
+#. module: biztech_monthly_sales_report
+#. openerp-web
+#: code:addons/biztech_monthly_sales_report/static/src/xml/sale_view.xml:15
+#, python-format
+msgid "Export As Excel"
+msgstr "Export As Excel"
+
+#. module: biztech_monthly_sales_report
+#. openerp-web
+#: code:addons/biztech_monthly_sales_report/static/src/xml/sale_view.xml:12
+#, python-format
+msgid "Export As PDF"
+msgstr "Export As PDF"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_report_wizard_download_data
+msgid "File"
+msgstr "Archivo"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_report_wizard_download_name
+msgid "File Name"
+msgstr "Nombre del archivo"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_wizard.monthly.sales.dashboard.report_from_date
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_wizard.monthly.sales.dashboard.report_from_sequence
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.monthly_sales_dashboard_wizard_form_view
+msgid "From"
+msgstr "De"
+
+#. module: biztech_monthly_sales_report
+#: selection:wizard.monthly.sales.dashboard.report,select_range:0
+msgid "From-To"
+msgstr "Desde-Hasta"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "Grand Total"
+msgstr "Grand Total"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.view_report_wizard_download
+msgid "Here is the File :"
+msgstr "Here is the File :"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_report_wizard_download_id
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_wizard.monthly.sales.dashboard.report_id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "INV Number"
+msgstr "Nº Factura"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_report_wizard_download___last_update
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_wizard.monthly.sales.dashboard.report___last_update
+msgid "Last Modified on"
+msgstr "Última Modificación en"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_report_wizard_download_write_uid
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_wizard.monthly.sales.dashboard.report_write_uid
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_report_wizard_download_write_date
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_wizard.monthly.sales.dashboard.report_write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: biztech_monthly_sales_report
+#: selection:wizard.monthly.sales.dashboard.report,so_state:0
+msgid "Locked"
+msgstr "Bloqueado"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "Margin %"
+msgstr "Margen %"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "Margin €"
+msgstr "Margen €"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "Number of SO"
+msgstr "Nº de pedidos"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "Payment Term"
+msgstr "Forma de Pago"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "Price Unit"
+msgstr "Unidad de precio"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "Price Without Tax"
+msgstr "Total € sin IGIC"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "Price without Tax"
+msgstr "Total € sin IGIC"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "Product Int Ref"
+msgstr "Referencia Producto"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "Product Name"
+msgstr "Nombre del producto"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "QTY"
+msgstr "Uds"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model,name:biztech_monthly_sales_report.model_sale_order
+#: selection:wizard.monthly.sales.dashboard.report,so_state:0
+msgid "Quotation"
+msgstr "Presupuesto"
+
+#. module: biztech_monthly_sales_report
+#: selection:wizard.monthly.sales.dashboard.report,so_state:0
+msgid "Quotation Sent"
+msgstr "Presupuesto enviado"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_wizard.monthly.sales.dashboard.report_select_range
+msgid "Range"
+msgstr "Rango"
+
+#. module: biztech_monthly_sales_report
+#: selection:wizard.monthly.sales.dashboard.report,select_range:0
+msgid "Rapid"
+msgstr "Inform Rapido"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_wizard.monthly.sales.dashboard.report_rapid_selection
+msgid "Rapid Selection"
+msgstr "Seleccion rapida"
+
+#. module: biztech_monthly_sales_report
+#. openerp-web
+#: code:addons/biztech_monthly_sales_report/static/src/js/main.js:42
+#, python-format
+msgid "Report"
+msgstr "Informe"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.view_report_wizard_download
+msgid "Report Complete"
+msgstr "Report Complete"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_report_wizard_download_report_type
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_wizard.monthly.sales.dashboard.report_report_type
+msgid "Report Type"
+msgstr "Tipo de Informe"
+
+#. module: biztech_monthly_sales_report
+#. openerp-web
+#: code:addons/biztech_monthly_sales_report/static/src/xml/sale_view.xml:18
+#: model:ir.ui.menu,name:biztech_monthly_sales_report.main_menu_dashboards_views
+#: model:ir.ui.menu,name:biztech_monthly_sales_report.report_dashboard_menu_main
+#, python-format
+msgid "Reports"
+msgstr "Informes"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "SO Number"
+msgstr "Nº Pedido"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_wizard.monthly.sales.dashboard.report_so_state
+msgid "SO States"
+msgstr "SO States"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "SO Tax Amount €"
+msgstr "IGIC"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "SO Total Amount without Tax €"
+msgstr "Total € Sin IGIC"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "SO Total Amount €"
+msgstr "Total € con IGIC"
+
+#. module: biztech_monthly_sales_report
+#. openerp-web
+#: code:addons/biztech_monthly_sales_report/static/src/js/main.js:11
+#: model:ir.actions.act_window,name:biztech_monthly_sales_report.action_sales_dashboard_wizard
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.monthly_sales_dashboard_wizard_form_view
+#, python-format
+msgid "Sales Dashboard Report"
+msgstr "Informs de venta"
+
+#. module: biztech_monthly_sales_report
+#: selection:wizard.monthly.sales.dashboard.report,so_state:0
+msgid "Sales Order"
+msgstr "Pedido de ventas"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.menu,name:biztech_monthly_sales_report.sales_report_dashboard_menu_main
+msgid "Sales Reports"
+msgstr "Informe de ventas"
+
+#. module: biztech_monthly_sales_report
+#: selection:report.wizard.download,report_type:0
+#: selection:wizard.monthly.sales.dashboard.report,report_type:0
+msgid "Sales Summary - (Totals) Per Date"
+msgstr "Resumen de ventas (Totales)"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_report_wizard_download_summary
+msgid "Summary"
+msgstr "Resumen"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "TAX"
+msgstr "IGIC"
+
+#. module: biztech_monthly_sales_report
+#: selection:wizard.monthly.sales.dashboard.report,rapid_selection:0
+msgid "This Month"
+msgstr "Este Mes"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_wizard.monthly.sales.dashboard.report_to_date
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_wizard.monthly.sales.dashboard.report_to_sequence
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.monthly_sales_dashboard_wizard_form_view
+msgid "To"
+msgstr "Hasta"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "Total Amount"
+msgstr "Importe total"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "Total Cost"
+msgstr "Coste total"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "Total Margin €"
+msgstr "Margen €"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_wizard.monthly.sales.dashboard.report_cust_type_ids
+msgid "Type"
+msgstr "Tipo"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.monthly_sales_dashboard_wizard_form_view
+msgid "View Report"
+msgstr "Ver informe"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.print_monthly_dashboard_report
+msgid "Week Day"
+msgstr "Día"
+
+#. module: biztech_monthly_sales_report
+#: selection:wizard.monthly.sales.dashboard.report,rapid_selection:0
+msgid "Yesterday"
+msgstr "Ayer"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model.fields,field_description:biztech_monthly_sales_report.field_wizard.monthly.sales.dashboard.report_cust_zone_ids
+msgid "Zone"
+msgstr "Zona"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.ui.view,arch_db:biztech_monthly_sales_report.monthly_sales_dashboard_wizard_form_view
+msgid "or"
+msgstr "o"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model,name:biztech_monthly_sales_report.model_report_wizard_download
+msgid "report.wizard.download"
+msgstr "report.wizard.download"
+
+#. module: biztech_monthly_sales_report
+#: model:ir.model,name:biztech_monthly_sales_report.model_wizard.monthly.sales.dashboard.report
+msgid "wizard.monthly.sales.dashboard.report"
+msgstr "wizard.monthly.sales.dashboard.report"
+

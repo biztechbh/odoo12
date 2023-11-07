@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            id="action_report_stock_valuation"
+            model="stock.quantity.history"
+            string="Stock Valuation Report"
+            report_type="qweb-pdf"
+            name="inventory_valuation_report.report_stock_valuation"
+            file="inventory_valuation_report.report_stock_valuation"
+            menu="True"
+        />
+    </data>
+</odoo>

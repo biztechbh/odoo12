@@ -1,0 +1,438 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* dashboard_sales_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-29 11:47+0000\n"
+"PO-Revision-Date: 2019-03-29 11:47+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "<b>Date:</b>"
+msgstr "<b>Date:</b>"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "<b>Report Name:</b>"
+msgstr "<b>Report Name:</b>"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.sales_dashboard_wizard_form_view
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: dashboard_sales_report
+#: selection:wizard.sales.dashboard.report,so_state:0
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.view_report_wizard_download
+msgid "Close"
+msgstr "Cerrar"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_report_wizard_download_create_uid
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_wizard_sales_dashboard_report_create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_report_wizard_download_create_date
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_wizard_sales_dashboard_report_create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "Customer Int. Ref."
+msgstr "Código Cliente"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "Customer Name"
+msgstr "Nombre del cliente"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.sales_dashboard_wizard_form_view
+msgid "Customer Ref. Filter"
+msgstr "Filtrar por cód. de cliente"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_wizard_sales_dashboard_report_customer_selection
+msgid "Customer Selection"
+msgstr "Filtro por clientes"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_wizard_sales_dashboard_report_customer_ids
+msgid "Customer(s)"
+msgstr "Cliente(s)"
+
+#. module: dashboard_sales_report
+#: selection:wizard.sales.dashboard.report,customer_selection:0
+msgid "Customers"
+msgstr "Filtro por cliente(s)"
+
+#. module: dashboard_sales_report
+#: selection:wizard.sales.dashboard.report,customer_selection:0
+msgid "Customers Ref."
+msgstr "Cliente por cód"
+
+#. module: dashboard_sales_report
+#: selection:report.wizard.download,report_type:0
+#: selection:wizard.sales.dashboard.report,report_type:0
+msgid "Daily Sales Full Report"
+msgstr "Ventas Diarias Completo"
+
+#. module: dashboard_sales_report
+#: selection:report.wizard.download,report_type:0
+#: selection:wizard.sales.dashboard.report,report_type:0
+msgid "Daily Sales Summary"
+msgstr "Resumen Ventas Diarias"
+
+#. module: dashboard_sales_report
+#: model:ir.actions.report,name:dashboard_sales_report.action_sales_dashboard_report
+msgid "Dashboard Report"
+msgstr "Dashboard Report"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_report_wizard_download_data_pdf
+msgid "Data"
+msgstr "Datos"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "Date"
+msgstr "Fecha"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_report_wizard_download_display_name
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_wizard_sales_dashboard_report_display_name
+msgid "Display Name"
+msgstr "Nombre a Mostrar"
+
+#. module: dashboard_sales_report
+#: code:addons/dashboard_sales_report/wizard/dashboard.py:76
+#, python-format
+msgid "End Date should be grater than Start Date."
+msgstr "End Date should be grater than Start Date."
+
+#. module: dashboard_sales_report
+#. openerp-web
+#: code:addons/dashboard_sales_report/static/src/xml/sale_view.xml:15
+#, python-format
+msgid "Export As Excel"
+msgstr "Export As Excel"
+
+#. module: dashboard_sales_report
+#. openerp-web
+#: code:addons/dashboard_sales_report/static/src/xml/sale_view.xml:12
+#, python-format
+msgid "Export As PDF"
+msgstr "Export As PDF"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_report_wizard_download_data
+msgid "File"
+msgstr "Archivo"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_report_wizard_download_name
+msgid "File Name"
+msgstr "Nombre del archivo"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_wizard_sales_dashboard_report_from_date
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_wizard_sales_dashboard_report_from_sequence
+#: model:ir.ui.view,arch_db:dashboard_sales_report.sales_dashboard_wizard_form_view
+msgid "From"
+msgstr "De"
+
+#. module: dashboard_sales_report
+#: selection:wizard.sales.dashboard.report,select_range:0
+msgid "From-To"
+msgstr "Desde-Hasta"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "Grand Total"
+msgstr "Grand Total"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.view_report_wizard_download
+msgid "Here is the File :"
+msgstr "Here is the File :"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_report_wizard_download_id
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_wizard_sales_dashboard_report_id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "INV Number"
+msgstr "Nº Factura"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_report_wizard_download___last_update
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_wizard_sales_dashboard_report___last_update
+msgid "Last Modified on"
+msgstr "Última Modificación en"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_report_wizard_download_write_uid
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_wizard_sales_dashboard_report_write_uid
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_report_wizard_download_write_date
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_wizard_sales_dashboard_report_write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: dashboard_sales_report
+#: selection:wizard.sales.dashboard.report,so_state:0
+msgid "Locked"
+msgstr "Bloqueado"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "Margin %"
+msgstr "Margen %"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "Margin €"
+msgstr "Margen €"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "Number of SO"
+msgstr "Nº de pedidos"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "Payment Term"
+msgstr "Forma de Pago"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "Price Unit"
+msgstr "Unidad de precio"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "Price Without Tax"
+msgstr "Total € sin IGIC"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "Price without Tax"
+msgstr "Total € sin IGIC"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "Product Int Ref"
+msgstr "Referencia Producto"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "Product Name"
+msgstr "Nombre del producto"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "QTY"
+msgstr "Uds"
+
+#. module: dashboard_sales_report
+#: model:ir.model,name:dashboard_sales_report.model_sale_order
+#: selection:wizard.sales.dashboard.report,so_state:0
+msgid "Quotation"
+msgstr "Presupuesto"
+
+#. module: dashboard_sales_report
+#: selection:wizard.sales.dashboard.report,so_state:0
+msgid "Quotation Sent"
+msgstr "Presupuesto enviado"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_wizard_sales_dashboard_report_select_range
+msgid "Range"
+msgstr "Rango"
+
+#. module: dashboard_sales_report
+#: selection:wizard.sales.dashboard.report,select_range:0
+msgid "Rapid"
+msgstr "Inform Rapido"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_wizard_sales_dashboard_report_rapid_selection
+msgid "Rapid Selection"
+msgstr "Seleccion rapida"
+
+#. module: dashboard_sales_report
+#. openerp-web
+#: code:addons/dashboard_sales_report/static/src/js/main.js:42
+#, python-format
+msgid "Report"
+msgstr "Informe"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.view_report_wizard_download
+msgid "Report Complete"
+msgstr "Report Complete"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_report_wizard_download_report_type
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_wizard_sales_dashboard_report_report_type
+msgid "Report Type"
+msgstr "Tipo de Informe"
+
+#. module: dashboard_sales_report
+#. openerp-web
+#: code:addons/dashboard_sales_report/static/src/xml/sale_view.xml:18
+#: model:ir.ui.menu,name:dashboard_sales_report.main_menu_dashboards_views
+#: model:ir.ui.menu,name:dashboard_sales_report.report_dashboard_menu_main
+#, python-format
+msgid "Reports"
+msgstr "Informes"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "SO Number"
+msgstr "Nº Pedido"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_wizard_sales_dashboard_report_so_state
+msgid "SO States"
+msgstr "SO States"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "SO Tax Amount €"
+msgstr "IGIC"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "SO Total Amount without Tax €"
+msgstr "Total € Sin IGIC"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "SO Total Amount €"
+msgstr "Total € con IGIC"
+
+#. module: dashboard_sales_report
+#. openerp-web
+#: code:addons/dashboard_sales_report/static/src/js/main.js:11
+#: model:ir.actions.act_window,name:dashboard_sales_report.action_sales_dashboard_wizard
+#: model:ir.ui.view,arch_db:dashboard_sales_report.sales_dashboard_wizard_form_view
+#, python-format
+msgid "Sales Dashboard Report"
+msgstr "Informs de venta"
+
+#. module: dashboard_sales_report
+#: selection:wizard.sales.dashboard.report,so_state:0
+msgid "Sales Order"
+msgstr "Pedido de ventas"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.menu,name:dashboard_sales_report.sales_report_dashboard_menu_main
+msgid "Sales Reports"
+msgstr "Informe de ventas"
+
+#. module: dashboard_sales_report
+#: selection:report.wizard.download,report_type:0
+#: selection:wizard.sales.dashboard.report,report_type:0
+msgid "Sales Summary - (Totals) Per Date"
+msgstr "Resumen de ventas (Totales)"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_report_wizard_download_summary
+msgid "Summary"
+msgstr "Resumen"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "TAX"
+msgstr "IGIC"
+
+#. module: dashboard_sales_report
+#: selection:wizard.sales.dashboard.report,rapid_selection:0
+msgid "This Month"
+msgstr "Este Mes"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_wizard_sales_dashboard_report_to_date
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_wizard_sales_dashboard_report_to_sequence
+#: model:ir.ui.view,arch_db:dashboard_sales_report.sales_dashboard_wizard_form_view
+msgid "To"
+msgstr "Hasta"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "Total Amount"
+msgstr "Importe total"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "Total Cost"
+msgstr "Coste total"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "Total Margin €"
+msgstr "Margen €"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_wizard_sales_dashboard_report_cust_type_ids
+msgid "Type"
+msgstr "Tipo"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.sales_dashboard_wizard_form_view
+msgid "View Report"
+msgstr "Ver informe"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.print_dashboard_report
+msgid "Week Day"
+msgstr "Día"
+
+#. module: dashboard_sales_report
+#: selection:wizard.sales.dashboard.report,rapid_selection:0
+msgid "Yesterday"
+msgstr "Ayer"
+
+#. module: dashboard_sales_report
+#: model:ir.model.fields,field_description:dashboard_sales_report.field_wizard_sales_dashboard_report_cust_zone_ids
+msgid "Zone"
+msgstr "Zona"
+
+#. module: dashboard_sales_report
+#: model:ir.ui.view,arch_db:dashboard_sales_report.sales_dashboard_wizard_form_view
+msgid "or"
+msgstr "o"
+
+#. module: dashboard_sales_report
+#: model:ir.model,name:dashboard_sales_report.model_report_wizard_download
+msgid "report.wizard.download"
+msgstr "report.wizard.download"
+
+#. module: dashboard_sales_report
+#: model:ir.model,name:dashboard_sales_report.model_wizard_sales_dashboard_report
+msgid "wizard.sales.dashboard.report"
+msgstr "wizard.sales.dashboard.report"
+

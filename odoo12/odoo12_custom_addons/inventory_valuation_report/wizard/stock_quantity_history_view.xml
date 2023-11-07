@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_stock_quantity_history_custom" model="ir.ui.view">
+        <field name="name">Inventory Report Custom</field>
+        <field name="model">stock.quantity.history</field>
+        <field name="inherit_id" ref="stock_account.view_stock_quantity_history" />
+        <field name="arch" type="xml">
+            <field name="date" position="after">
+                <field name="location_ids" widget="many2many_tags" />
+            </field>
+            <button name="open_table" position="after">
+                <button name="download_pdf" type="object" string="Download PDF" />
+            </button>
+        </field>
+    </record>
+
+</odoo>
+

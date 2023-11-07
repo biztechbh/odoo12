@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="printer_server_view_form">
+            <field name="name">printer.server.form</field>
+            <field name="model">printer.server</field>
+            <field name="arch" type="xml">
+                <form string="Printer Servers">
+                    <header>
+                        <button name="update_printers" type="object" string="Update Printers" class="btn-primary"/>
+                        <button name="action_update_jobs" type="object" string="Update Jobs" class="btn-primary"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="address"/>
+                            <field name="port"/>
+                        </group>
+                        <group>
+                            <separator string="Printers" colspan="2"/>
+                            <field name="printer_ids" nolabel="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="printer_server_view_tree">
+            <field name="name">printer.server.tree</field>
+            <field name="model">printer.server</field>
+            <field name="arch" type="xml">
+                <tree string="Printer Servers">
+                    <field name="name"/>
+                    <field name="address"/>
+                    <field name="port"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="printer_server_view_search">
+            <field name="name">printer.server.search</field>
+            <field name="model">printer.server</field>
+            <field name="arch" type="xml">
+                <search string="Printer Servers">
+                    <field name="name"/>
+                    <field name="address"/>
+                    <field name="port"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="printer_server_action">
+            <field name="name">LAN Printer Servers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">printer.server</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="LAN Printer Servers" sequence="10" id="printer_server_menu" parent="product_small_label_acespritech"
+            action="printer_server_action"/>
+
+    </data>
+</odoo>

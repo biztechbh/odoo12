@@ -1,0 +1,97 @@
+.fa-2x {
+    font-size: 2em !important;
+}
+.fa-3x {
+    font-size: 3em !important;
+}
+.fa-4x {
+    font-size: 4em !important;
+}
+.fa-5x {
+    font-size: 5em !important;
+}
+
+
+.btn-default {
+    color: #4c4c4c;
+    background-color: #ffffff;
+    border-color: #cccccc;
+}
+
+{
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 13px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+.fa {
+font-family: FontAwesome !important;
+}
+.fa-loader:before {
+    /*Old Glyph - content: "\e030";*/
+    content: "\f01e" !important;
+}
+.fa-plus:before {
+    /*Old Glyph - content: "\2b";*/
+    content: "\f067" !important;
+}
+.fa-minus:before {
+    /*Old Glyph - content: "\2212";*/
+    content: "\f068" !important;
+}
+.fa-search:before {
+    /*Old Glyph - content: "\e003";*/
+    content: "\f002" !important;
+}
+.fa-remove:before {
+    /*Old Glyph - content: "\e014";*/
+    content: "\f00d" !important;
+}
+.fa-sort:before {
+    /*Old Glyph - content: "\e150";*/
+    content: "\f0dc" !important;
+}
+.fa-sort-asc:before {
+    /*Old Glyph - content: "\e155";*/
+    content: "\f0de" !important;
+}
+.fa-sort-desc:before {
+    /*Old Glyph - content: "\e156";*/
+    content: "\f0dd" !important;
+}
+.fa-pencil:before {
+    /*Old Glyph - content: "\270f";*/
+    content: "\f040" !important;
+}
+.fa-trash:before {
+    /*Old Glyph - content: "\e020";*/
+    content: "\f1f8" !important;
+}
+.fa-eye-close:before {
+    /*Old Glyph - content: "\e106";*/
+    content: "\f070" !important;
+}
+.fa-flash:before {
+    /*Old Glyph - content: "\e162";*/
+    content: "\f0e7" !important;
+}
+.fa-cog:before {
+    /*Old Glyph - content: "\e019";*/
+    content: "\f013" !important;
+}

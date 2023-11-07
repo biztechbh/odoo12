@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_hourly_sale_report_wizard_download">
+            <field name="name">Report</field>
+            <field name="model">report.hourly.sale.wizard.download</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="name" invisible="1"/>
+                    <field name="data" invisible="1"/>
+                    <div>
+                        <h4>Report Complete</h4>
+                        <p>Here is the File :
+                            <field name="data" readonly="1" filename="name"/>
+                        </p>
+                    </div>
+                    <footer>
+                        <button special="cancel" string="Close" type="object" class="btn-primary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

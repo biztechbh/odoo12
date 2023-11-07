@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="product_form_view_custom">
+            <field name="name">product.product.form.view.custom</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <field name="barcode" position="after">
+                    <field name="location_ids" widget="many2many_tags"/>
+                </field>
+            </field>
+        </record>
+
+<!--        <record id="stock_quant_view_tree" model="ir.ui.view">-->
+<!--            <field name="name">stock.quant.tree.inherit</field>-->
+<!--            <field name="model">stock.quant</field>-->
+<!--            <field name="inherit_id" ref="stock.view_stock_quant_tree"/>-->
+<!--             <field eval="1" name="priority"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <field name="value" position="after">-->
+<!--                        <field name="value" string="ValueTotal" sum="Total"/>-->
+<!--                </field>-->
+<!--            </field>-->
+<!--        </record>-->
+
+    </data>
+
+
+</odoo>
+

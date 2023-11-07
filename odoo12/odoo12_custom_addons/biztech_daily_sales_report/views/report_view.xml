@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="assets_backend" name="Sales Dashboard Report Assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/biztech_daily_sales_report/static/src/css/footable.bootstrap.min.css"/>
+                <link rel="stylesheet" href="/biztech_daily_sales_report/static/src/css/main.css"/>
+<!--                <link rel="stylesheet" href="/dashboard_sales_report/static/src/css/bootstrap.min.css"/>-->
+
+                <script type="text/javascript" src="/biztech_daily_sales_report/static/src/js/footable.min.js"/>
+                <script type="text/javascript" src="/biztech_daily_sales_report/static/src/js/main.js"/>
+            </xpath>
+        </template>
+
+        <report
+                id="action_sales_dashboard_report"
+                string="Daily sales Report"
+                model="report.daily.sale.wizard.download"
+                report_type="qweb-pdf"
+                file="biztech_daily_sales_report.report_dashboard"
+                name="biztech_daily_sales_report.report_dashboard"
+                print_report_name="'Daily sales report'"
+                menu="False"
+        />
+
+        <template id="print_dashboard_report">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <t t-set="data" t-value="docs.get_data()"/>
+                    <t t-set="summary" t-value="docs.get_summary()"/>
+<!--                    <t t-set="data" t-value="json.loads(data)"/>-->
+<!--                    <t t-esc="data" t-value="data"/>-->
+                    <br/>
+<!--                    <t t-esc="type(data)"/>-->
+
+<!--                        <t t-set="data" t-value="docs.get_sorted_data(data ,false)"/>-->
+                        <div class="well">
+                            <div style="padding:0;width:50%;float:left;">
+                                <b>Report Name:</b>
+                                <span t-esc="summary.get('report_name')"/>
+                            </div>
+                            <div style="padding:0;width:50%;float:left;">
+                                <b>Date:</b>
+                                <span t-esc="summary.get('data')"/>
+                            </div>
+                        </div>
+                        <t t-set="g_untax" t-value="0"/>
+                        <t t-set="g_tot_with_amount" t-value="0"/>
+                        <t t-set="g_cost" t-value="0"/>
+                        <t t-set="g_tot_discount" t-value="0"/>
+                        <t t-set="g_tot_net_amt" t-value="0"/>
+                        <t t-set="g_qty" t-value="0"/>
+<!--                        <t t-foreach="data" t-as="da">-->
+                            <table class="table table-condensed">
+<!--                                <div>-->
+<!--                                    <strong>-->
+<!--                                        <span t-esc="data.get(da)[0].get('categ_name').replace('_', ' ') or 'Non-Defined'"/>-->
+<!--                                        - -->
+<!--                                        <span t-esc="data.get(da)[0].get('categ_name').replace('_', ' ') or 'Non-Defined'"/>-->
+<!--                                    </strong>-->
+<!--                                </div>-->
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Invoice No.</th>
+                                    <th style="text-align: right;">Barcode</th>
+                                    <th style="text-align: right;">Product</th>
+
+                                    <th style="text-align: right;">Unit</th>
+                                    <th style="text-align: right;">QTY</th>
+                                    <th style="text-align: right;">Rate</th>
+                                    <th style="text-align: right;">Vat</th>
+                                    <th style="text-align: right;">Discount</th>
+                                    <th style="text-align: right;">Net Amount</th>
+                                </tr>
+<!--                                <t t-set="tot_qty" t-value="0"/>-->
+<!--                                <t t-set="tot_with_amount" t-value="0"/>-->
+<!--                                <t t-set="tot_discount" t-value="0"/>-->
+<!--                                <t t-set="tot_cost" t-value="0"/>-->
+<!--                                <t t-set="tot_net_amt" t-value="0"/>-->
+<!--                                <t t-set="tot_per_mar" t-value="0"/>-->
+<!--                                <t t-set="tot_tax" t-value="0"/>-->
+<!--                                <t t-set="total" t-value="0"/>-->
+                                <t t-set="counter" t-value="0"/>
+                                <t t-foreach="data" t-as="d">
+                                    <tr>
+                                        <td>
+                                            <span t-esc="d.get('date_order').date()"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="d.get('invoice_number')"/>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <span t-esc="d.get('barcode')"/>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <span t-esc="d.get('product_id')"/>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <span t-esc="d.get('unit')"/>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <span t-esc="d.get('qty')"/>
+                                        </td>
+<!--                                        <t t-set="tot_qty" t-value="tot_qty + float(d.get('qty'))"/>-->
+                                        <t t-set="g_qty" t-value="g_qty + float(d.get('qty'))"/>
+                                        <td style="text-align: right;">
+                                            <span t-esc="'%.3f'% d.get('rate')"/><t t-esc="env.user.company_id.currency_id.symbol"/>
+                                        </td>
+<!--                                        <t t-set="tot_cost" t-value="tot_cost + float(d.get('rate'))"/>-->
+                                        <t t-set="g_cost" t-value="g_cost + float(d.get('rate'))"/>
+                                        <td style="text-align: right;">
+                                            <span t-esc="'%.3f'% d.get('with_out_amount')"/><t t-esc="env.user.company_id.currency_id.symbol"/>
+                                        </td>
+<!--                                        <t t-set="tot_with_amount" t-value="tot_with_amount + float(d.get('with_out_amount'))"/>-->
+                                        <t t-set="g_tot_with_amount" t-value="g_tot_with_amount + float(d.get('with_out_amount'))"/>
+                                        <td style="text-align: right;">
+                                            <span t-esc="'%.3f'% (d.get('discount'))"/>
+                                        </td>
+                                        <t t-set="g_tot_discount" t-value="g_tot_discount + float(d.get('discount'))"/>
+                                        <td style="text-align: right;">
+                                            <span t-esc="'%.3f'% (d.get('net_amount'))"/>
+                                        </td>
+                                        <t t-set="g_tot_net_amt" t-value="g_tot_net_amt + float(d.get('net_amount'))"/>
+
+                                        <t t-set="counter" t-value="counter + 1"/>
+                                    </tr>
+                                </t>
+                            </table>
+                        <table class="table table-condensed">
+                            <tfoot>
+                                <tr>
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                    <th style="text-align: right;">QTY</th>
+                                    <th style="text-align: right;">Rate</th>
+                                    <th style="text-align: right;">Vat</th>
+                                    <th style="text-align: right;">Discount</th>
+                                    <th style="text-align: right;">Net Amount</th>
+                                </tr>
+                                <tr>
+
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                    <th/>
+                                    <th style="text-align: right;">
+                                        <span t-esc="g_qty"/>
+                                    </th>
+                                    <th style="text-align: right;">
+                                        <span t-esc="'%.3f'% g_cost"/><t t-esc="env.user.company_id.currency_id.symbol"/>
+                                    </th>
+                                    <th style="text-align: right;">
+                                        <span t-esc="'%.3f'% g_tot_with_amount"/><t t-esc="env.user.company_id.currency_id.symbol"/>
+                                    </th>
+                                    <th style="text-align: right;">
+                                        <span t-esc="'%.3f'% g_tot_discount"/><t t-esc="env.user.company_id.currency_id.symbol"/>
+                                    </th>
+                                    <th style="text-align: right;">
+                                        <span t-esc="'%.3f'% g_tot_net_amt"/><t t-esc="env.user.company_id.currency_id.symbol"/>
+                                    </th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                </div>
+            </t>
+        </template>
+
+        <template id="report_dashboard">
+            <t t-call="web.html_container">
+                <t t-call="biztech_daily_sales_report.print_dashboard_report"/>
+            </t>
+        </template>
+
+    </data>
+</odoo>

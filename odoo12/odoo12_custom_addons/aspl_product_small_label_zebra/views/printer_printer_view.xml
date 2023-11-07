@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="printer_printer_view_form">
+            <field name="name">printer.printer.form</field>
+            <field name="model">printer.printer</field>
+            <field name="arch" type="xml">
+                <form string="Printers">
+                    <header>
+                        <button name="printer_enable" type="object" string="Enable" class="btn-primary"
+                            attrs="{'invisible': [('status', 'in', ('available', 'printing'))]}" />
+                        <button name="printer_disable" type="object" string="Disable" class="btn-primary"
+                            attrs="{'invisible': [('status', 'in', ('unavailable', 'error'))]}" />
+                        <button name="action_cancel_all_jobs" type="object" string="Cancel all running jobs"
+                            class="btn-primary" />
+                        <button name="set_default_printer" string="Set Default" type="object" class="btn-primary" />
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <label for="name" class="oe_edit_only" />
+                                <field name="name" />
+                            </h1>
+                        </div>
+                        <group col="4">
+                            <field name="system_name" />
+                            <field name="default" />
+                        </group>
+                        <group>
+                            <field name="uri" />
+                        </group>
+                        <group col="4">
+                            <field name="model" />
+                            <field name="location" />
+                            <field name="status" />
+                            <field name="status_message" />
+                        </group>
+                        <group>
+                            <separator string="Jobs" colspan="2" />
+                            <field name="job_ids" nolabel="1" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="printer_printer_view_tree">
+            <field name="name">printer.printer.tree</field>
+            <field name="model">printer.printer</field>
+            <field name="arch" type="xml">
+                <tree string="Printers" colors="green:status=='available'; orange:status=='printing'; red:1;">
+                    <field name="default" />
+                    <field name="name" />
+                    <field name="system_name" />
+                    <field name="status" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="printer_printer_view_search">
+            <field name="name">printer.printer.search</field>
+            <field name="model">printer.printer</field>
+            <field name="arch" type="xml">
+                <search string="Printers">
+                    <field name="name" />
+                    <field name="system_name" />
+                    <field name="location" />
+                    <field name="status" />
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="printer_printer_action">
+            <field name="name">LAN Printers</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">printer.printer</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="LAN Printers" id="printer_printer_menu" parent="product_small_label_acespritech" 
+            action="printer_printer_action" sequence="20"/>
+
+    </data>
+</odoo>

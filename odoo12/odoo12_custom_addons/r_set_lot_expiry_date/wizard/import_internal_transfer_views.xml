@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="set_lot_expiry_date_wizard" model="ir.ui.view">
+        <field name="name">set.lot.expiry.date.wizard</field>
+        <field name="model">set.lot.expiry.date</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="res_limit"/>
+<!--                            <field name="lot_ids" widget="one2many" >-->
+<!--                                <tree string="Invitation details" create="false" delete="false">-->
+<!--                                    <field name="name" />-->
+<!--                                    <field name="life_date" />-->
+<!--                                    <field name="product_id"/>-->
+<!--                                </tree>-->
+<!--                            </field>-->
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="import_csv" string="Set Expiry Date" type="object"/>
+                    <button name="cancel" string="Discard" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_set_lot_expiry_date_wizard" model="ir.actions.act_window">
+        <field name="name">Set Lot Expiry Date</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">set.lot.expiry.date</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="set_lot_expiry_date_wizard"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem
+        id="menu_set_lot_expiry_date_wizard"
+        parent="stock.menu_stock_warehouse_mgmt"
+        action="action_set_lot_expiry_date_wizard"
+        groups="stock.group_stock_multi_locations"
+        sequence="28"/>
+</odoo>
