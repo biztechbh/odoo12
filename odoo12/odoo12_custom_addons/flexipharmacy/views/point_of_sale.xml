@@ -196,6 +196,6 @@
     </record>
 
     <menuitem id="menu_point_dashboard" action="flexipharmacy.tag_dashboard_id" name="POS Dashboard"
-              parent="point_of_sale.menu_point_root" sequence="99" groups="point_of_sale.group_pos_user"/>
+              parent="point_of_sale.menu_point_root" sequence="1" groups="point_of_sale.group_pos_user"/>
 
 </odoo>

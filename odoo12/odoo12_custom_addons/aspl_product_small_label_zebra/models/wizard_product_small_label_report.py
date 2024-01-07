@@ -16,6 +16,7 @@ import os, glob
 import io
 import logging
 _logger = logging.getLogger(__name__)
+from wand.image import Image as Img
 
 try:
     from simple_zpl2 import ZPLDocument, EAN13_Barcode, Code128_Barcode, EAN8_Barcode, UPC_A_Barcode, QR_Barcode, Standard2of5_Barcode
@@ -615,7 +616,6 @@ class wizard_product_small_label_report(models.TransientModel):
             'context': {'default_report_image': encoded_string},
         }
 
-
     @api.multi
     def action_print(self, record_id):
         if not self.product_ids:
@@ -636,7 +636,6 @@ class wizard_product_small_label_report(models.TransientModel):
                 raise Warning('Give proper barcode height and width value(s) for display')
 
             data = self.read()[0]
-            print("\n\n\n\n data>>>>=---",data)
             datas = {
                 'ids': self._ids,
                 'model': 'wizard.product.small.label.report',

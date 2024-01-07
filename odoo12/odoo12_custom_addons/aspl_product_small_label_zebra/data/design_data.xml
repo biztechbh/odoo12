@@ -12,30 +12,32 @@
                   <t t-foreach="doc_ids" t-as="doc_id">
                     <t t-call="web.basic_layout">
                         <div>
-                            <div style="width:225px;margin-left:-10px;border:2px solid black;background:black;color:white;font-size:15px;" align="center">
+                            <div style="width:225px;margin-left:-10px;font-size:15px;" align="center">
                                 <b><span t-esc="company" /></b>
                             </div>
+
+
                             <t t-if="data['form']['with_barcode']">
                                 <t t-if="get_barcode_string(product['barcode'], 'Code128', data)">
-                                    <div style="width:350px; margin-left:-75px;color:black;font-size:22px;" align="center">
+                                    <div style="width:350px; margin-left:-75px;margin-top:5px;color:black;font-size:22px;" align="center">
                                         <t t-set="style" t-value="get_style(data)" />
+
                                         <img t-att-src="'data:image/png;base64,%s' % to_text(get_barcode_string(product['barcode'], 'Code128', data))"
-                                            style="width:85%;height:22px;align:center;"/>
+                                            style="width:90%;height:40px;align:center;"/>
                                     </div>
                                 </t>
                             </t>
-                            <div  style="width:225px; margin-left:-10px; color:black;font-size:12px;" align="center">
-                                <span t-esc="product['barcode_str']"/>
-                            </div>
-                            <div  style=" width:225px; margin-left:-10px;margin-top:0; color:black;font-size:12px;" align="center">
-                                <span t-esc="product['product_id'].name"/>-<span t-esc="product['lot']"/>
-                            </div>
+                                 <div  style=" width:225px; margin-left:-10px;margin-top:10px; color:black;font-size:12px;" align="center">
+                                    <span t-esc="product['product_id'].name"/>-<span t-esc="product['lot']"/>
+                                </div>
                             <hr style="margin:0; padding:0; width:225px;"/>
-                            <div  style=" width:225px; color:black;font-size:12px; margin:0;">
-                                <span t-esc="price" style="margin-left:25px;"/>
-                                <span style="margin-left:20%;">|</span>
-                                 <span style="margin-left:4%;" t-esc="'{:.3f}'.format(product['price'])"/>
-                            </div>
+                           <div style=" width:225px; color:black;font-size:15px; margin-top:10px;">
+                                    <b><span t-esc="price" style="margin-left:25px;font-size:15px;"/></b>
+                                    <b><span style="margin-left:20%;">|</span></b>
+                                      <b><span style="margin-left:4%;" t-esc="'{:.3f}'.format(product['price'])"/></b>
+                                      <b><span style="margin-left:4%;" t-esc="product['currency_id'].name"/></b>
+
+                                </div>
                         </div>
                     </t>
                    </t>
@@ -45,14 +47,14 @@
             </field>
             <field name="label_width">38</field>
             <field name="label_height">25</field>
-            <field name="dpi">180</field>
+            <field name="dpi">80</field>
             <field name="margin_top">0</field>
             <field name="margin_left">0</field>
             <field name="margin_bottom">0</field>
             <field name="margin_right">0</field>
             <field name="with_barcode">True</field>
             <field name="barcode_height">500</field>
-            <field name="barcode_width">2000</field>
+            <field name="barcode_width">500</field>
             <field name="humanReadable">True</field>
             <field name="display_height">40</field>
             <field name="display_width">250</field>

@@ -36,11 +36,11 @@
          'aspl_product_small_label_zebra_report.xml',
     ],
     'images': ['static/description/main_screenshot.png'],
-    'external_dependencies':{
-       'python':[
-            'simple_zpl2', 'zebra', 'PIL', 'wand', 'cups'
-       ],
-    },
+    # 'external_dependencies':{
+    #    'python': [
+    #         'simple_zpl2', 'zebra', 'PIL', 'wand', 'cups'
+    #    ],
+    # },
     'installable': True,
     'auto_install': False,
 }
