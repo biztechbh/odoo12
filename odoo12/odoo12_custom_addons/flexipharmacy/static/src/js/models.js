@@ -756,50 +756,91 @@ odoo.define('flexipharmacy.models', function (require) {
 			$('.delivery_order_count').text(delivery_orders.length);
 		},
 		scan_product: function(parsed_code){
+		debugger;
             var selectedOrder = this.get_order();
-            if(parsed_code.product_code){
+            var product_code = '';
+            var sltech_domain = [];
+            if(parsed_code.product_code && parsed_code.product_lot_code){
                 var product = this.db.get_product_by_barcode(parsed_code.product_code);
+                product_code = parsed_code.product_lot_code;
+                sltech_domain = [['product_id', '=', product.id],['name','=',product_code]]
             }else{
                 var product = this.db.get_product_by_barcode(parsed_code.base_code);
+                product_code = parsed_code.base_code;
+                sltech_domain = [['product_id', '=', product.id],['sltech_barcode','=',product_code]]
             }
 
 //            if(!product){
 //                return false;
 //            }
             /*Check the product in the Lot*/
+            var sltech_model = '';
+            if (product.tracking === 'lot'){
+                sltech_model = 'stock.production.lot';
+            }else if(product.tracking === 'none'){
+                sltech_model = 'product.product';
+                sltech_domain = [['id', '=', product.id],['barcode','=',product_code]]
+            }
+
             var params = {
-                model: 'stock.production.lot',
+                model: sltech_model,
                 method: 'search_read',
-                domain: [['product_id', '=', product.id],['name','=',parsed_code.product_lot_code]],
+                domain: sltech_domain,
             }
             return rpc.query(params, {async: false}).then(function(serials){
                 if(serials.length > 0){
                     var lot_info = _.filter(serials, function(serial){
-                        return parsed_code.product_lot_code === serial.name
-                    });
-                    if(Number(lot_info[0].product_qty) < 1){
-                        return false;
-                    }else{
-                        if(parsed_code.type === 'price'){
-                            selectedOrder.add_product(product, {price:parsed_code.value});
-                        }else if(parsed_code.type === 'weight'){
-                            selectedOrder.add_product(product, {quantity:parsed_code.value, merge:false});
-                        }else if(parsed_code.type === 'discount'){
-                            selectedOrder.add_product(product, {discount:parsed_code.value, merge:false});
+                        if(parsed_code.product_code && parsed_code.product_lot_code){
+                            return parsed_code.product_lot_code === serial.name
                         }else{
-                            if(parsed_code.product_lot_code){
-                                selectedOrder.add_product(product, {lot_number:parsed_code.product_lot_code});
-                            }else{
-                                selectedOrder.add_product(product);
-                            }
+                            return parsed_code.base_code === serial.sltech_barcode
                         }
-                        return true;
+                    });
+
+                    if (!(parsed_code.product_code && parsed_code.product_lot_code) && product.tracking === 'lot'){
+                         var new_list = [];
+                         const result = lot_info.map(product => {
+                              if (product.product_qty > 0) {
+                                    new_list.push(product);
+                              }
+                         });
+
+//                         lot_info = new_list;
+                         if (new_list){
+                            selectedOrder.add_product(product, {lot_number:new_list[0].name});
+                            return true
+                         }
+                     }
+
+                    if (product.tracking === 'lot'){
+                        if(Number(lot_info[0].product_qty) < 1){
+                            return false;
+                        }else{
+                            if(parsed_code.type === 'price'){
+                                selectedOrder.add_product(product, {price:parsed_code.value});
+                            }else if(parsed_code.type === 'weight'){
+                                selectedOrder.add_product(product, {quantity:parsed_code.value, merge:false});
+                            }else if(parsed_code.type === 'discount'){
+                                selectedOrder.add_product(product, {discount:parsed_code.value, merge:false});
+                            }else{
+                                if(parsed_code.product_lot_code){
+                                    selectedOrder.add_product(product, {lot_number:parsed_code.product_lot_code});
+                                }else{
+                                    selectedOrder.add_product(product);
+                                }
+                            }
+                            return true;
+                        }
+                    }else if (product.tracking === 'none'){
+                        selectedOrder.add_product(product);
                     }
+
                 }else{
                     return false
                 }
             })
         },
+
 		/*_onNotification: function(notifications){
 			var self = this;
 			for (var notif of notifications) {

@@ -70,4 +70,3 @@ class PurchaseOrder(models.Model):
             template_obj.with_context(ctx=ctx).send_mail(purchase_order_obj.id, force_send=True)
         return [purchase_order_obj.id, purchase_order_obj.name]
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

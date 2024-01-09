@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+
     <data>
 
         <menuitem id="product_small_label_acespritech" name="Product Small Label" parent="sale.sale_menu_root" />

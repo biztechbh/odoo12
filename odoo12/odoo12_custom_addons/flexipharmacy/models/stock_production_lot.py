@@ -20,6 +20,7 @@ class stock_production_lot(models.Model):
     expiry_state = fields.Selection([('expired', 'Expired'), ('near_expired', 'Near Expired')], string="Expiry State",
                                     compute="_get_product_state")
     state_check = fields.Selection([('expired', 'Expired'), ('near_expired', 'Near Expired')], string="state")
+    sltech_barcode = fields.Char(related='product_id.barcode')
 
     @api.model
     def product_state_check(self):

@@ -11,18 +11,20 @@
 {
     'name': 'POS Pharmacy',
     'version': '14.0.1',
-    'author': 'Acespritech Solutions Pvt. Ltd.',
+    'author': 'Biztech Computer',
     'summary': 'POS Pharmacy with Responsive Design (Community)',
     'description': "POS Pharmacy with Responsive Design (Community)",
     'category': 'Point Of Sale',
-    'website': 'http://www.acespritech.com',
+    'author': 'Biztech Computer',
+    'maintainer': 'Biztech Computer',
+    'website': 'https://biztechbh.biz',
     'depends': ['base', 'web', 'point_of_sale', 'sale_management', 'barcodes', 'product_expiry', 'purchase',
                 'hr_attendance',
                 'account', 'stock'],
     'price': 170.00,
     'currency': 'EUR',
     'images': [
-        'static/description/main_screenshot.png',
+        'static/description/icon.png',
     ],
     'data': [
         'security/ir.model.access.csv',

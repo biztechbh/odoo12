@@ -23,57 +23,68 @@ from odoo.exceptions import ValidationError
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    @api.model
-    def create(self, vals):
-        res = super(ProductTemplate, self).create(vals)
-        if res:
-            param_obj = self.env['ir.config_parameter'].sudo()
-            gen_barcode = param_obj.get_param('gen_barcode')
-            barcode_selection = param_obj.get_param('barcode_selection')
-            gen_internal_ref = param_obj.get_param('gen_internal_ref')
-
-            if not vals.get('barcode') and gen_barcode:
-                if barcode_selection == 'code_39':
-                    barcode_code = barcode.codex.Code39(str(res.id) + datetime.now().strftime("%S%M%H%d%m%y"))
-                if barcode_selection == 'code_128':
-                    barcode_code = barcode.codex.Code39(str(res.id) + datetime.now().strftime("%S%M%H%d%m%y"))
-                if barcode_selection == 'ean_13':
-                    barcode_code = barcode.ean.EuropeanArticleNumber13(
-                        str(res.id) + datetime.now().strftime("%S%M%H%d%m%y"))
-                if barcode_selection == 'ean_8':
-                    barcode_code = barcode.ean.EuropeanArticleNumber8(
-                        str(res.id) + datetime.now().strftime("%S%M%H%d%m%y"))
-                if barcode_selection == 'isbn_13':
-                    barcode_code = barcode.isxn.InternationalStandardBookNumber13(
-                        '978' + str(res.id) + datetime.now().strftime("%S%M%H%d%m%y"))
-                if barcode_selection == 'isbn_10':
-                    barcode_code = barcode.isxn.InternationalStandardBookNumber10(
-                        str(res.id) + datetime.now().strftime("%S%M%H%d%m%y"))
-                if barcode_selection == 'issn':
-                    barcode_code = barcode.isxn.InternationalStandardSerialNumber(
-                        str(res.id) + datetime.now().strftime("%S%M%H%d%m%y"))
-                if barcode_selection == 'upca':
-                    barcode_code = barcode.upc.UniversalProductCodeA(
-                        str(res.id) + datetime.now().strftime("%S%M%H%d%m%y"))
-                if barcode_selection == 'issn':
-                    res.write({'barcode': barcode_code})
-                else:
-                    res.write({'barcode': barcode_code.get_fullcode()})
-            # generate internal reference
-            if not vals.get('default_code') and gen_internal_ref:
-                res.write({'default_code': (str(res.id).zfill(6) + str(datetime.now().strftime("%S%M%H")))[:8]})
-        return res
-
-    @api.multi
-    def write(self, vals):
-        res = super(ProductTemplate, self).write(vals)
-        for each in self:
-            product_ids = self.env['product.product'].search([('product_tmpl_id', '=', each.id)])
-            if product_ids:
-                self._cr.execute("""
-                        update product_product set write_date = '%s'  where id in (%s);
-                    """ % (each.write_date, ','.join(map(str, product_ids._ids))))
-        return res
+    def barcode_action(self):
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "barcode.wizard",
+            "views": [[False, "form"]],
+            "target": "new",
+            "context": {
+                'default_barcode': self.barcode,
+                'default_product_id': self.id
+            },
+        }
+    # @api.model
+    # def create(self, vals):
+    #     res = super(ProductTemplate, self).create(vals)
+    #     if res:
+    #         param_obj = self.env['ir.config_parameter'].sudo()
+    #         gen_barcode = param_obj.get_param('gen_barcode')
+    #         barcode_selection = param_obj.get_param('barcode_selection')
+    #         gen_internal_ref = param_obj.get_param('gen_internal_ref')
+    #
+    #         if not vals.get('barcode') and gen_barcode:
+    #             if barcode_selection == 'code_39':
+    #                 barcode_code = barcode.codex.Code39(str(res.id) + datetime.now().strftime("%S%M%H%d%m%y"))
+    #             if barcode_selection == 'code_128':
+    #                 barcode_code = barcode.codex.Code39(str(res.id) + datetime.now().strftime("%S%M%H%d%m%y"))
+    #             if barcode_selection == 'ean_13':
+    #                 barcode_code = barcode.ean.EuropeanArticleNumber13(
+    #                     str(res.id) + datetime.now().strftime("%S%M%H%d%m%y"))
+    #             if barcode_selection == 'ean_8':
+    #                 barcode_code = barcode.ean.EuropeanArticleNumber8(
+    #                     str(res.id) + datetime.now().strftime("%S%M%H%d%m%y"))
+    #             if barcode_selection == 'isbn_13':
+    #                 barcode_code = barcode.isxn.InternationalStandardBookNumber13(
+    #                     '978' + str(res.id) + datetime.now().strftime("%S%M%H%d%m%y"))
+    #             if barcode_selection == 'isbn_10':
+    #                 barcode_code = barcode.isxn.InternationalStandardBookNumber10(
+    #                     str(res.id) + datetime.now().strftime("%S%M%H%d%m%y"))
+    #             if barcode_selection == 'issn':
+    #                 barcode_code = barcode.isxn.InternationalStandardSerialNumber(
+    #                     str(res.id) + datetime.now().strftime("%S%M%H%d%m%y"))
+    #             if barcode_selection == 'upca':
+    #                 barcode_code = barcode.upc.UniversalProductCodeA(
+    #                     str(res.id) + datetime.now().strftime("%S%M%H%d%m%y"))
+    #             if barcode_selection == 'issn':
+    #                 res.write({'barcode': barcode_code})
+    #             else:
+    #                 res.write({'barcode': barcode_code.get_fullcode()})
+    #         # generate internal reference
+    #         if not vals.get('default_code') and gen_internal_ref:
+    #             res.write({'default_code': (str(res.id).zfill(6) + str(datetime.now().strftime("%S%M%H")))[:8]})
+    #     return res
+    #
+    # @api.multi
+    # def write(self, vals):
+    #     res = super(ProductTemplate, self).write(vals)
+    #     for each in self:
+    #         product_ids = self.env['product.product'].search([('product_tmpl_id', '=', each.id)])
+    #         if product_ids:
+    #             self._cr.execute("""
+    #                     update product_product set write_date = '%s'  where id in (%s);
+    #                 """ % (each.write_date, ','.join(map(str, product_ids._ids))))
+    #     return res
 
     @api.model
     def create_from_ui(self, product):
@@ -95,12 +106,37 @@ class ProductTemplate(models.Model):
     return_valid_days = fields.Integer(string="Return Valid Days")
 
 
+class BarcodeWizard(models.TransientModel):
+    _name = 'barcode.wizard'
+    _description = 'barcode wizard'
+    _rec_name = 'barcode'
+
+    barcode = fields.Char(string='Barcode')
+    product_id = fields.Many2one('product.template')
+
+    def barcode_update(self):
+        if self.barcode:
+            self.product_id.barcode = self.barcode
+
+
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
     near_expire = fields.Integer(string='Near Expire', compute='check_near_expiry')
     expired = fields.Integer(string='Expired', compute='check_expiry')
     pos_product_commission_ids = fields.One2many('pos.product.commission', 'product_id', string='Product Commission ')
+
+    def barcode_action(self):
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "barcode.wizard",
+            "views": [[False, "form"]],
+            "target": "new",
+            "context": {
+                'default_barcode': self.barcode,
+                'default_product_id': self.id
+            },
+        }
 
     @api.constrains('pos_product_commission_ids')
     def _check_commission_values(self):

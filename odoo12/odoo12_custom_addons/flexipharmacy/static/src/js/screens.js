@@ -54,6 +54,7 @@ odoo.define('flexipharmacy.screens', function (require) {
     }
     screens.ScreenWidget.include({
         barcode_product_action: function(code){
+            debugger;
             var self = this;
             setTimeout(function(){
                 if(code.code.length == 8){
@@ -71,10 +72,12 @@ odoo.define('flexipharmacy.screens', function (require) {
                             self.gui.show_screen(self.barcode_product_screen, null, null, true);
                         }
                     }else{
-                        self.gui.show_popup('error',{
-                            'title': _t('Error: Could not Add Product'),
-                            'body': _("Please check the given Lot is there with the quantity in it."),
-                        });
+                        if(code.product_code || code.product_lot_code){
+                            self.gui.show_popup('error',{
+                                'title': _t('Error: Could not Add Product'),
+                                'body': _("Please check the given Lot is there with the quantity in it."),
+                            });
+                        }
                     }
                 });
             },750);

@@ -36,7 +36,7 @@
 
         <menuitem id="hourly_sales_report"
                   name="Hourly Sales Report" action="biztech_hourly_sales_report.action_hourly_sales_dashboard_wizard"
-                  parent="flexipharmacy.menu_point_config_report" sequence="1"/>
+                  parent="point_of_sale.menu_point_rep" sequence="1"/>
 
     </data>
 </odoo>
