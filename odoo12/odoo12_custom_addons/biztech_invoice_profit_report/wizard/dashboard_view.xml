@@ -33,7 +33,7 @@
         </record>
 
         <menuitem id="invoice_profit_report"
-                  name="Invoice Profit Report" action="biztech_invoice_profit_report.action_invoice_dashboard_wizard"
+                  name="Purchase Profit Report" action="biztech_invoice_profit_report.action_invoice_dashboard_wizard"
                   parent="flexipharmacy.menu_point_config_report" sequence="1"/>
 
     </data>

@@ -2,6 +2,18 @@
 <odoo>
 
     <data>
+
+        <record id="package_product_template_only_form_view" model="ir.ui.view">
+            <field name="name">package.product.template.form.view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <header>
+                    <button name="barcode_action" string="Barcode" type="object"/>
+                </header>
+            </field>
+        </record>
+
         <template id="report_simple_label" inherit_id="product.report_simple_label">
             <xpath expr="//div" position="replace">
                 <div class="col-xs-4" style="padding:0;">
@@ -47,5 +59,36 @@
                 </div>
             </t>
         </template>
+
+        <record id="barcode_wizard_form_view" model="ir.ui.view">
+            <field name="name">barcode.wizard.form.view</field>
+            <field name="model">barcode.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Barcode">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="barcode"/>
+                                <field name="product_id" invisible="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <span groups="base.group_user" >
+                            <button class="oe_highlight" name="barcode_update" string="Update" type="object" />
+                            <button special="cancel" string="Cancel"/>
+                        </span>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_barcode_wizard" model="ir.actions.act_window">
+            <field name="name">barcode</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">barcode.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
     </data>
 </odoo>

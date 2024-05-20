@@ -58,7 +58,7 @@
             <t t-if="widget.pos.config and widget.pos.config.enable_delivery_charges">
                 <div class="delivery_order_icon_widget" >
                     <div class="oe_status" id="delivery_list_chrome">
-                        <a title="Delivery Orders" href="#" style="position: relative;outline: none;color:#fff">
+                        <a title="Delivery Orders" href="#" >
                             <i class="fa fa-truck" aria-hidden="true"></i>
                             <div class="notification-count">
                                 <span class="delivery_order_count"/>

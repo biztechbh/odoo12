@@ -106,37 +106,12 @@ class ProductTemplate(models.Model):
     return_valid_days = fields.Integer(string="Return Valid Days")
 
 
-class BarcodeWizard(models.TransientModel):
-    _name = 'barcode.wizard'
-    _description = 'barcode wizard'
-    _rec_name = 'barcode'
-
-    barcode = fields.Char(string='Barcode')
-    product_id = fields.Many2one('product.template')
-
-    def barcode_update(self):
-        if self.barcode:
-            self.product_id.barcode = self.barcode
-
-
 class ProductProduct(models.Model):
     _inherit = "product.product"
 
     near_expire = fields.Integer(string='Near Expire', compute='check_near_expiry')
     expired = fields.Integer(string='Expired', compute='check_expiry')
     pos_product_commission_ids = fields.One2many('pos.product.commission', 'product_id', string='Product Commission ')
-
-    def barcode_action(self):
-        return {
-            "type": "ir.actions.act_window",
-            "res_model": "barcode.wizard",
-            "views": [[False, "form"]],
-            "target": "new",
-            "context": {
-                'default_barcode': self.barcode,
-                'default_product_id': self.id
-            },
-        }
 
     @api.constrains('pos_product_commission_ids')
     def _check_commission_values(self):

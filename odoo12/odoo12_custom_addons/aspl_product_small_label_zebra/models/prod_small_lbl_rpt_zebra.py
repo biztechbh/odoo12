@@ -51,8 +51,7 @@ class prod_small_label_zebra(models.AbstractModel):
 
                     if product_line.stock_production_lot_id:
                         price_unit = round(product_line.product_id.lst_price * (1 - (0.0) / 100.0),3)
-                        taxes = product_line.product_id.taxes_id.compute_all(price_unit, self.env.user.company_id.currency_id, 1,
-                                                                          product_line.product_id, self.env.user.partner_id)['taxes']
+                        taxes = product_line.product_id.taxes_id.compute_all(price_unit, self.env.user.company_id.currency_id, 1, product_line.product_id, self.env.user.partner_id)['taxes']
                         currency_id = self.env.user.company_id.currency_id
                         if taxes:
                             for each in taxes:
@@ -69,6 +68,13 @@ class prod_small_label_zebra(models.AbstractModel):
                     else:
                         barcode = str(product_line.product_id.barcode)
                         lot = 000
+                        price_unit = round(product_line.product_id.lst_price * (1 - (0.0) / 100.0), 3)
+                        taxes = product_line.product_id.taxes_id
+                        if taxes:
+                            for each in taxes:
+                                price += price_unit +((each.amount * price_unit)/100)
+                        else:
+                            price = price_unit
                         currency_id = self.env.user.company_id.currency_id
                         product_list.append(
                             {'product_id': product_line.product_id, 'barcode': barcode, 'lot': lot, 'price': price,

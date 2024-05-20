@@ -227,12 +227,12 @@ odoo.define('flexipharmacy.screens', function (require) {
                 var has_valid_product_lot = _.every(order.orderlines.models, function(line){
                     return line.has_valid_product_lot();
                 });
-		        if(order.get_missing_mode()){
-                    for(var i=0 ; i < order.orderlines.length ; i++){
-                        var old_quantity = order.orderlines.models[i].get_quantity()
-                        order.orderlines.models[i].set_quantity(Number(old_quantity) * -1)
-                    }
-                }
+//		        if(order.get_missing_mode()){
+//                    for(var i=0 ; i < order.orderlines.length ; i++){
+//                        var old_quantity = order.orderlines.models[i].get_quantity()
+//                        order.orderlines.models[i].set_quantity(Number(old_quantity) * -1)
+//                    }
+//                }
                 if(partner){
                     var params = {
                     model: 'account.invoice',

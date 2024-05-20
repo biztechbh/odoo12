@@ -18,6 +18,8 @@ from babel.numbers import format_decimal
 from io import BytesIO
 
 
+
+
 class PosOrder(models.Model):
     _inherit = 'pos.order'
 
@@ -33,23 +35,40 @@ class PosOrder(models.Model):
             domain += " AND pol.product_id = (%s)" % (product_id)
         if shop_id:
             domain += " AND po.shop_id = (%s)" % (shop_id)
+        # SQL = f'''
+        #     select
+        #     TO_CHAR(po.date_order AT TIME ZONE 'UTC' AT TIME ZONE '{tz_new}', 'YYYY-MM-DD') as date_order,
+        #     COALESCE(sum(round(pol.cost_price, 3)),0.0) as cost,
+        #     poc.name as categ_name,
+        #     round(sum(pol.price_subtotal_incl - pol.cost_price)::numeric, 3) as profit_amount,
+        #     pp.id as prod_id,
+        #     SUM(pol.price_subtotal_incl) as invoice_amount
+        #     from pos_order_line as pol
+        #     left join pos_order po on po.id = pol.order_id
+        #     left join product_product pp on pp.id = pol.product_id
+        #     left join product_template pt on pt.id = pp.product_tmpl_id
+        #     left join pos_category poc on poc.id = pt.pos_categ_id
+        #     where{domain}
+        #     group by TO_CHAR(po.date_order AT TIME ZONE 'UTC' AT TIME ZONE '{tz_new}', 'YYYY-MM-DD'), poc.name, pp.id
+        #     order by TO_CHAR(po.date_order AT TIME ZONE 'UTC' AT TIME ZONE '{tz_new}', 'YYYY-MM-DD')
+        # '''
         SQL = f'''
-            select 
+            select
             TO_CHAR(po.date_order AT TIME ZONE 'UTC' AT TIME ZONE '{tz_new}', 'YYYY-MM-DD') as date_order,
-            COALESCE(sum(round(pol.cost_price, 3)),0.0) as cost,
+            SUM(CASE WHEN pol.qty > 0 THEN round(pol.qty * pol.cost_price, 3) ELSE 0.0 END) as cost,
             poc.name as categ_name,
-            round(sum(pol.price_subtotal_incl - pol.cost_price)::numeric, 3) as profit_amount,
+            round(sum(CASE WHEN pol.price_subtotal_incl > 0 AND pol.qty > 0 THEN (pol.price_subtotal_incl) - (pol.qty * pol.cost_price) ELSE 0.0 END)::numeric, 3) as profit_amount,
             pp.id as prod_id,
-            SUM(pol.price_subtotal_incl) as invoice_amount
+            SUM(CASE WHEN pol.price_subtotal_incl > 0 AND pol.qty > 0 THEN  pol.price_subtotal_incl ELSE 0 END) as invoice_amount
             from pos_order_line as pol
-            left join pos_order po on po.id = pol.order_id
-            left join product_product pp on pp.id = pol.product_id
-            left join product_template pt on pt.id = pp.product_tmpl_id
-            left join pos_category poc on poc.id = pt.pos_categ_id
-            where{domain}
+            LEFT JOIN pos_order po on po.id = pol.order_id
+            LEFT JOIN product_product pp on pp.id = pol.product_id
+            LEFT JOIN product_template pt on pt.id = pp.product_tmpl_id
+            LEFT JOIN pos_category poc on poc.id = pt.pos_categ_id
+            WHERE pol.cost_price > 0 AND {domain}  -- Filter for cost price > 0
             group by TO_CHAR(po.date_order AT TIME ZONE 'UTC' AT TIME ZONE '{tz_new}', 'YYYY-MM-DD'), poc.name, pp.id
             order by TO_CHAR(po.date_order AT TIME ZONE 'UTC' AT TIME ZONE '{tz_new}', 'YYYY-MM-DD')
-        '''
+                '''
         self._cr.execute(SQL)
         result = self._cr.dictfetchall()
         for each in result:

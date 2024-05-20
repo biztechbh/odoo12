@@ -286,12 +286,14 @@ class stock_location(models.Model):
             search([('available_in_pos', '=', True), ('type', '=', 'product')])
         all_products = []
         for product in list_product:
-            stock_ids = self.env['stock.quant'].search([('product_id', '=', product.id),
-                                                        ('location_id', '=', location_id)])
-            if stock_ids:
-                for stock in stock_ids:
-                    if stock.quantity <= 0.00:
-                        all_products.append(stock.product_id.id)
+            if product.qty_available <= 0.00:
+                all_products.append(product.id)
+            # stock_ids = self.env['stock.quant'].search([('product_id', '=', product.id),
+            #                                             ('location_id', '=', location_id)])
+            # if stock_ids:
+            #     for stock in stock_ids:
+            #         if stock.quantity <= 0.00:
+            #             all_products.append(stock.product_id.id)
 
         else:
                 all_products.append(product.id)

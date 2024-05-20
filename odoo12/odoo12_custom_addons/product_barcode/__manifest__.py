@@ -34,7 +34,7 @@
     'data': [
         'views/product_label.xml',
     ],
-    'images': ['static/description/banner.jpg'],
+    'images': ['static/description/icon.png'],
     'license': 'AGPL-3',
     'installable': True,
     'application': False,

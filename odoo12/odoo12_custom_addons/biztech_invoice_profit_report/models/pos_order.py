@@ -58,7 +58,9 @@ class PosOrder(models.Model):
                 each['categ_name'] = 'Non-Defined'
             each['categ_name'] = str(each.get('categ_name')).replace(' ', '_')
             cost_price = self.env['product.product'].browse(each.get('product_id')).standard_price
+            sale_price = self.env['product.product'].browse(each.get('product_id')).lst_price
             each['cost'] = round((cost_price * each.get('qty')), 3)
+            each['invoice_amount'] = round(sale_price * each.get('qty'), 3)
             each['profit_amount'] = round(each.get('invoice_amount') - each.get('cost'), 3)
             each['profit_per'] = round((each.get('profit_amount') * 100) / (each.get('cost')), 2) if each.get('cost') != 0 else 100
             main_report_data.append(each)

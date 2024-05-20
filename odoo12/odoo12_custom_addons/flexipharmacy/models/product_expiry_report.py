@@ -18,6 +18,8 @@ from dateutil.relativedelta import relativedelta
 from odoo.tools.misc import xlwt
 from odoo.exceptions import Warning
 from odoo import models, fields, api, _
+from datetime import datetime
+
 
 
 class ResConfigSettings(models.TransientModel):
@@ -128,7 +130,7 @@ class ProductExpiryReport(models.Model):
                              'location_name': location_name,
                              'default_code': each.get('default_code') or '--------',
                              'life_date': each.get('life_date').strftime('%Y-%m-%d'),
-                             'remaining_days': relativedelta(each.get('life_date'), date.today()).days,
+                             'remaining_days': (datetime.strptime(each.get('life_date').strftime('%Y-%m-%d'), "%Y-%m-%d") - datetime.strptime(date.today().strftime('%Y-%m-%d'), "%Y-%m-%d")).days,
                              'available_qty': self.env['stock.production.lot'].browse(each.get('id')).product_qty if each.get('id') else False,}]
                     else:
                         vals[each.get('product_category')].append(
@@ -137,7 +139,7 @@ class ProductExpiryReport(models.Model):
                              'location_name': location_name,
                              'default_code': each.get('default_code') or '--------',
                              'life_date': each.get('life_date').strftime('%Y-%m-%d'),
-                             'remaining_days': relativedelta(each.get('life_date'), date.today()).days,
+                             'remaining_days': (datetime.strptime(each.get('life_date').strftime('%Y-%m-%d'), "%Y-%m-%d") - datetime.strptime(date.today().strftime('%Y-%m-%d'), "%Y-%m-%d")).days,
                              'available_qty': self.env['stock.production.lot'].browse(each.get('id')).product_qty if each.get('id') else False,})
             else:
                 vals = {}
@@ -154,7 +156,7 @@ class ProductExpiryReport(models.Model):
                              'product_category': each.get('product_category'),
                              'default_code': each.get('default_code') or '--------',
                              'life_date': each.get('life_date').strftime('%Y-%m-%d'),
-                             'remaining_days': relativedelta(each.get('life_date'), date.today()).days,
+                             'remaining_days': (datetime.strptime(each.get('life_date').strftime('%Y-%m-%d'), "%Y-%m-%d") - datetime.strptime(date.today().strftime('%Y-%m-%d'), "%Y-%m-%d")).days,
                              'available_qty': self.env['stock.production.lot'].browse(each.get('id')).product_qty if each.get('id') else False,}]
                     else:
                         vals[location_name].append(
@@ -163,7 +165,7 @@ class ProductExpiryReport(models.Model):
                              'product_category': each.get('product_category'),
                              'default_code': each.get('default_code') or '--------',
                              'life_date': each.get('life_date').strftime('%Y-%m-%d'),
-                             'remaining_days': relativedelta(each.get('life_date'), date.today()).days,
+                             'remaining_days': (datetime.strptime(each.get('life_date').strftime('%Y-%m-%d'), "%Y-%m-%d") - datetime.strptime(date.today().strftime('%Y-%m-%d'), "%Y-%m-%d")).days,
                              'available_qty': self.env['stock.production.lot'].browse(each.get('id')).product_qty if each.get('id') else False,})
         vals.update(
             {'group_by': self.group_by, 'num_days': self.num_expiry_days, 'today_date': date.today()})

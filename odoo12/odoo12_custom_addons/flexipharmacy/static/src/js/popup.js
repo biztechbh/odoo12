@@ -568,7 +568,7 @@ odoo.define('flexipharmacy.popup', function (require) {
                         		selectedOrder.set_ret_o_id(result[0].id);
                                 selectedOrder.set_ret_o_ref(result[0].pos_reference);
                                 if(result[0].partner_id && result[0].partner_id[0]){
-                                	var partner = self.pos.db.get_partner_by_id(result[0].partner_id[0]) 
+                                	var partner = self.pos.db.get_partner_by_id(result[0].partner_id[0])
                                 	selectedOrder.set_client(partner);
                                 } else{
                                 	selectedOrder.set_client(false);
@@ -669,7 +669,7 @@ odoo.define('flexipharmacy.popup', function (require) {
 	    },
 	    click_cancel: function(){
 	        $("div#sale_mode").trigger('click');
-	        var selectedOrder = this.pos.get_order(); 
+	        var selectedOrder = this.pos.get_order();
 	        selectedOrder.set_ret_o_id(null);
             selectedOrder.set_ret_o_ref(null);
 	    	this.gui.close_popup();
@@ -3615,7 +3615,7 @@ odoo.define('flexipharmacy.popup', function (require) {
                                 console.log("Error: ",e);
                             });
                             if(self.pos.config.iface_print_via_proxy){
-                                var report_name = "flexipharmacy.pos_z_thermal_report_template";
+                                var report_name = "flexipharmacy.pos_z_report_template";
                                 var params = {
                                     model: 'ir.actions.report',
                                     method: 'get_html_report',

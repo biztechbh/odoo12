@@ -134,7 +134,7 @@
                                         <td class="text-right">
                                             <span t-field="user.company_id.currency_id.symbol"/>
                                             <t t-set="sum" t-value="l.get('sum')"/>
-                                            <t t-esc="doc_id.get_precision(sum)"/>
+                                            <t t-esc="l.get('sum')"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -296,7 +296,7 @@
                                             <td class="text-right">
                                                 <span t-field="user.company_id.currency_id.symbol"/>
                                                 <t t-set="sum" t-value="l.get('sum')"/>
-                                                <t t-esc="doc_id.get_precision(sum)"/>
+                                                <t t-esc="l.get('sum')"/>
                                             </td>
                                         </tr>
                                     </table>
@@ -424,7 +424,7 @@
                                         <td class="text-right">
                                             <span t-field="user.company_id.currency_id.symbol"/>
                                             <t t-set="sum" t-value="l.get('sum')"/>
-                                            <t t-esc="doc_id.get_precision(sum)"/>
+                                            <t t-esc="l.get('sum')"/>
                                         </td>
                                     </tr>
                                 </table>

@@ -2,7 +2,32 @@
 
 import math
 import re
-from odoo import api, models
+from odoo import api, models, fields
+
+
+class BarcodeWizard(models.TransientModel):
+    _name = 'barcode.wizard'
+    _description = 'barcode wizard'
+    _rec_name = 'barcode'
+
+    barcode = fields.Char(string='Barcode')
+    product_id = fields.Many2one('product.template')
+
+    def barcode_update(self):
+        if self.barcode:
+            self.product_id.barcode = self.barcode
+
+    def barcode_action(self):
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "barcode.wizard",
+            "views": [[False, "form"]],
+            "target": "new",
+            "context": {
+                'default_barcode': self.barcode,
+                'default_product_id': self.id
+            },
+        }
 
 
 class ProductAutoBarcode(models.Model):
@@ -15,11 +40,11 @@ class ProductAutoBarcode(models.Model):
         res.barcode = ean
         return res
 
-    @api.multi
-    def write(self, values):
-        ean = generate_ean(str(self.product_tmpl_id.id))
-        values['barcode'] = ean
-        return super(ProductAutoBarcode, self).write(values)
+    # @api.multi
+    # def write(self, values):
+    #     ean = generate_ean(str(self.product_tmpl_id.id))
+    #     values['barcode'] = ean
+    #     return super(ProductAutoBarcode, self).write(values)
 
 
 @api.multi
@@ -80,8 +105,8 @@ class ProductAutoBarcodeInherit(models.Model):
         res.barcode = ean
         return res
 
-    @api.multi
-    def write(self, values):
-        ean = generate_ean(str(self.id))
-        values['barcode'] = ean
-        return super(ProductAutoBarcodeInherit, self).write(values)
+    # @api.multi
+    # def write(self, values):
+    #     ean = generate_ean(str(self.id))
+    #     values['barcode'] = ean
+    #     return super(ProductAutoBarcodeInherit, self).write(values)

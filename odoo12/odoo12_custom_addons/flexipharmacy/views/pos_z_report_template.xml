@@ -57,7 +57,7 @@
                                         Started at
                                     </td>
                                     <td class="text-right">
-                                        <span t-esc="o.start_at"/>
+                                        <span t-esc="o.get_session_date(o.start_at)"/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -65,7 +65,7 @@
                                         Ended at
                                     </td>
                                     <td class="text-right">
-                                        <span t-esc="o.stop_at"/>
+                                        <span t-esc="o.get_session_date(o.stop_at)"/>
                                     </td>
                                 </tr>
                                 <tr>

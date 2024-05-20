@@ -173,7 +173,7 @@
 	height: auto;
 	max-height: 300px;
 	min-height: 300px;
-	position: absolute;
+	position: fixed;
 	right: 0;
 	top: 48px;
 	width: 440px;

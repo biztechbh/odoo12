@@ -48,5 +48,4 @@ class WizardPurchaseOrderLineBarcode(models.TransientModel):
             'context': {'default_product_ids': product_label_qty}
         }
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

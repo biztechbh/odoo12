@@ -4,19 +4,48 @@ from datetime import timedelta
 from odoo.addons import decimal_precision as dp
 from odoo.tools.float_utils import float_round
 from odoo.tools.float_utils import float_compare
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
 
 
 class PurchaseOrderLine(models.Model):
     _inherit = 'purchase.order.line'
 
     bonus_qty = fields.Float('Bonus Quantity', digits=dp.get_precision('Product Unit of Measure'))
-    new_price_unit = fields.Float('New Unit Price', store=True, digits=dp.get_precision('Product Price'))
+    new_price_unit = fields.Float('New Unit Price', compute='_compute_new_amount', store=True,
+                                  digits=dp.get_precision('Product Price'))
     date_expire = fields.Datetime(string='Expiry Date')
     lot_number = fields.Char('Lot/Serial Number')
-    price_unit = fields.Float(string='Unit Price',  store=True,required=True, digits=dp.get_precision('Product Price'))
-    price_subtotal = fields.Float(string='Subtotal')
+    price_unit = fields.Float(string='Unit Price', required=True,
+                              digits=dp.get_precision('Product Price'))
+    price_subtotal = fields.Float(string='Subtotal', store=True)
+    total_qty = fields.Float("Total Quantity", store=True, compute='_compute_total_quantity')
+    sl_no = fields.Integer(string='Sl. No.', compute='_compute_serial_number')
 
+    @api.depends('sequence', 'order_id')
+    def _compute_serial_number(self):
+        for order_line in self:
+            serial_no = 1
+            for line in order_line.mapped('order_id').order_line:
+                if line.product_id:
+                    line.sl_no = serial_no
+                    serial_no += 1
+                else:
+                    line.sl_no = 0
 
+    @api.depends('bonus_qty', 'product_qty')
+    def _compute_total_quantity(self):
+        for line in self:
+            line.total_qty = (line.bonus_qty + line.product_qty)
+
+    @api.depends('bonus_qty')
+    def _compute_new_amount(self):
+        for line in self:
+            if line.bonus_qty:
+                line.update({
+                    'price_unit': line.price_subtotal / line.product_qty,
+                    'new_price_unit': line.price_subtotal / (
+                            line.product_qty + line.bonus_qty) if line.bonus_qty > 0 else False,
+                })
 
     # @api.depends('price_subtotal', 'bonus_qty', 'product_qty', 'taxes_id')
     # def _compute_new_amount(self):
@@ -24,7 +53,8 @@ class PurchaseOrderLine(models.Model):
     #         if line.price_subtotal:
     #             line.update({
     #                 'price_unit': line.price_subtotal / line.product_qty,
-    #                 'new_price_unit': line.price_subtotal / (line.product_qty + line.bonus_qty) if line.bonus_qty > 0 else False,
+    #                 'new_price_unit': line.price_subtotal / (
+    #                             line.product_qty + line.bonus_qty) if line.bonus_qty > 0 else False,
     #             })
 
     # @api.depends('product_qty', 'price_unit', 'taxes_id')
@@ -51,26 +81,27 @@ class PurchaseOrderLine(models.Model):
     # def _compute_product_uom_qty(self):
     #     for line in self:
     #         if line.product_id.uom_id != line.product_uom:
-    #             line.product_uom_qty = line.product_uom._compute_quantity((line.product_qty + line.bonus_qty), line.product_id.uom_id)
+    #             line.product_uom_qty = line.product_uom._compute_quantity((line.product_qty + line.bonus_qty),
+    #                                                                       line.product_id.uom_id)
     #         else:
     #             line.product_uom_qty = line.product_qty + line.bonus_qty
-
-    def _prepare_compute_all_values(self):
-        # Hook method to returns the different argument values for the
-        # compute_all method, due to the fact that discounts mechanism
-        # is not implemented yet on the purchase orders.
-        # This method should disappear as soon as this feature is
-        # also introduced like in the sales module.
-        self.ensure_one()
-        return {
-            'new_price_unit': self.new_price_unit,
-            'bonus_qty': self.bonus_qty,
-            'price_unit': self.price_unit,
-            'currency_id': self.order_id.currency_id,
-            'product_qty': self.product_qty,
-            'product': self.product_id,
-            'partner': self.order_id.partner_id,
-        }
+    # #
+    # def _prepare_compute_all_values(self):
+    #     # Hook method to returns the different argument values for the
+    #     # compute_all method, due to the fact that discounts mechanism
+    #     # is not implemented yet on the purchase orders.
+    #     # This method should disappear as soon as this feature is
+    #     # also introduced like in the sales module.
+    #     self.ensure_one()
+    #     return {
+    #         'new_price_unit': self.new_price_unit,
+    #         'bonus_qty': self.bonus_qty,
+    #         'price_unit': self.price_unit,
+    #         'currency_id': self.order_id.currency_id,
+    #         'product_qty': self.product_qty,
+    #         'product': self.product_id,
+    #         'partner': self.order_id.partner_id,
+    #     }
 
     @api.multi
     def _prepare_stock_moves(self, picking):
@@ -102,7 +133,7 @@ class PosOrderLine(models.Model):
     @api.depends('pack_lot_ids')
     def compute_cost_price(self):
         for rec in self:
-            new_cost = rec.product_id.uom_id._compute_price(rec.product_id.standard_price,rec.uom_id)
+            new_cost = rec.product_id.uom_id._compute_price(rec.product_id.standard_price, rec.uom_id)
             rec.cost_price = new_cost
 #             if rec.pack_lot_ids:
 #                 move_id = self.env['stock.move.line'].search(['&', ('lot_id.name', '=', rec.pack_lot_ids[0].lot_name), ('product_id.product_tmpl_id.id', '=', rec.product_id.product_tmpl_id.id)])
@@ -169,37 +200,34 @@ class StockMoveLine(models.Model):
 class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
+    bonus_qty = fields.Float('Bonus Quantity', digits=dp.get_precision('Product Unit of Measure'))
+
     def _prepare_invoice_line_from_po_line(self, line):
-        if line.product_id.purchase_method == 'purchase':
-            qty = line.product_qty - line.qty_invoiced
-        else:
-            qty = line.product_qty
-        if float_compare(qty, 0.0, precision_rounding=line.product_uom.rounding) <= 0:
-            qty = 0.0
-        taxes = line.taxes_id
-        invoice_line_tax_ids = line.order_id.fiscal_position_id.map_tax(taxes, line.product_id,
-                                                                        line.order_id.partner_id)
-        invoice_line = self.env['account.invoice.line']
-        date = self.date or self.date_invoice
-        data = {
-            'purchase_line_id': line.id,
-            'name': line.order_id.name + ': ' + line.name,
-            'origin': line.order_id.origin,
-            'uom_id': line.product_uom.id,
-            'product_id': line.product_id.id,
-            'account_id': invoice_line.with_context({'journal_id': self.journal_id.id, 'type': 'in_invoice'})._default_account(),
-            'price_unit': line.order_id.currency_id._convert(
-                line.price_unit, self.currency_id, line.company_id, date or fields.Date.today(), round=False),
-            'quantity': qty,
-            'discount': 0.0,
-            'account_analytic_id': line.account_analytic_id.id,
-            'analytic_tag_ids': line.analytic_tag_ids.ids,
-            'invoice_line_tax_ids': invoice_line_tax_ids.ids
-        }
-        account = invoice_line.with_context(purchase_line_id=line.id).get_invoice_line_account('in_invoice',
-                                                                                               line.product_id,
-                                                                                               line.order_id.fiscal_position_id,
-                                                                                               self.env.user.company_id)
-        if account:
-            data['account_id'] = account.id
-        return data
+        vals = super()._prepare_invoice_line_from_po_line(line)
+        vals['quantity'] = line.product_qty
+        vals['bonus_qty'] = abs(line.qty_received - line.product_qty)
+        return vals
+
+
+class PurchaseOrder(models.Model):
+    _inherit = 'purchase.order'
+
+    @api.depends('state', 'order_line.qty_invoiced', 'order_line.qty_received', 'order_line.product_qty')
+    def _get_invoiced(self):
+        precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
+        for order in self:
+            if order.state not in ('purchase', 'done'):
+                order.invoice_status = 'no'
+                continue
+
+            if any(float_compare(line.qty_invoiced,
+                                 line.product_qty if line.product_id.purchase_method == 'purchase' else line.product_qty,
+                                 precision_digits=precision) == -1 for line in order.order_line):
+                order.invoice_status = 'to invoice'
+            elif all(float_compare(line.qty_invoiced,
+                                   line.product_qty if line.product_id.purchase_method == 'purchase' else line.qty_invoiced,
+                                   precision_digits=precision) >= 0 for line in order.order_line) and order.invoice_ids:
+                order.invoice_status = 'invoiced'
+            else:
+                order.invoice_status = 'no'
+

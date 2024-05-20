@@ -6,9 +6,13 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='order_line']//tree//field[@name='product_qty']" position="after">
                 <field name="bonus_qty" attrs="{'readonly':([('state', 'in', 'purchase')])}"/>
+                <field name="total_qty" invisible="1"/>
+            </xpath>
+             <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="before">
+                <field name="sl_no"/>
             </xpath>
             <field name="price_unit" position="after">
-                <field name="new_price_unit" readonly="1" invisible="1"/>
+                <field name="new_price_unit" readonly="1" />
             </field>
             <field name="price_subtotal" position="attributes">
                 <attribute name="readonly">0</attribute>
